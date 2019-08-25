@@ -4,12 +4,20 @@
     "author": "lyuanx",
     "language": "zh-hans",
     "root": ".",
-
+    "fontState": {
+        "size": "2",
+        "family": "sans",
+        "theme": "night"
+    },
     "plugins": [
+        "-sharing",
+        "-lunr",
+        "-search",
+        "-livereload",
         "donate",
-        "github-buttons@2.1.0"
+        "github-buttons@2.1.0",
+        "expandable-chapters"
     ],
-
     "pluginsConfig": {
         "donate": {
             "wechat": "",
