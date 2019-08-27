@@ -1,5 +1,7 @@
-[toc]
-# 一、存储卷的概念和类型
+# 数据卷
+
+## 一、存储卷的概念和类型
+
 > 为了保证数据的持久性，必须保证数据在外部存储在docker容器中，为了实现数据的持久性存储，在宿主机和容器内做映射，可以保证在容器的生命周期结束，数据依旧可以实现持久性存储。但是在k8s中，由于pod分布在各个不同的节点之上，并不能实现不同节点之间持久性数据的共享，并且，在节点故障时，可能会导致数据的永久性丢失。为此，k8s就引入了外部存储卷的功能。
 > k8s的存储卷类型：
 
@@ -30,7 +32,7 @@ hostPath(宿主机目录映射):
 > 1、在pod定义volume，并指明关联到哪个存储设备
 > 2、在容器使用volume mount进行挂载
 
-# 二、emptyDir存储卷演示
+## 二、emptyDir存储卷演示
 
 > 一个emptyDir 第一次创建是在一个pod被指定到具体node的时候，并且会一直存在在pod的生命周期当中，正如它的名字一样，它初始化是一个空的目录，pod中的容器都可以读写这个目录，这个目录可以被挂在到各个容器相同或者不相同的的路径下。当一个pod因为任何原因被移除的时候，这些数据会被永久删除。注意：一个容器崩溃了不会导致数据的丢失，因为容器的崩溃并不移除pod.
 >
@@ -79,8 +81,8 @@ spec:
   volumes:  #定义存储卷
   - name: html    #定义存储卷名称  
     emptyDir: {}  #定义存储卷类型
-[root@k8s-master volumes]# kubectl apply -f pod-vol-demo.yaml 
-pod/pod-vol-demo created 
+[root@k8s-master volumes]# kubectl apply -f pod-vol-demo.yaml
+pod/pod-vol-demo created
 [root@k8s-master volumes]# kubectl get pods
 NAME                                 READY     STATUS    RESTARTS   AGE
 pod-vol-demo                         2/2       Running   0          27s
@@ -106,7 +108,7 @@ Tue Oct 9 03:57:13 UTC 2018
 Tue Oct 9 03:57:15 UTC 2018
 ```
 
-# 三、hostPath存储卷演示
+## 三、hostPath存储卷演示
 
 > hostPath宿主机路径，就是把pod所在的宿主机之上的脱离pod中的容器名称空间的之外的宿主机的文件系统的某一目录和pod建立关联关系，在pod删除时，存储数据不会丢失。
 
@@ -171,7 +173,7 @@ node01.magedu.com
 [root@k8s-node02 ~]# mkdir -p /data/pod/volume1
 [root@k8s-node02 ~]# vim /data/pod/volume1/index.html
 node02.magedu.com
-[root@k8s-master volumes]# kubectl apply -f pod-hostpath-vol.yaml 
+[root@k8s-master volumes]# kubectl apply -f pod-hostpath-vol.yaml
 pod/pod-vol-hostpath created
 
 （4）访问测试
@@ -183,15 +185,15 @@ pod-vol-hostpath                     1/1       Running   0          37s       10
 [root@k8s-master volumes]# curl 10.244.2.35
 node02.magedu.com
 [root@k8s-master volumes]# kubectl delete -f pod-hostpath-vol.yaml  #删除pod，再重建，验证是否依旧可以访问原来的内容
-[root@k8s-master volumes]# kubectl apply -f pod-hostpath-vol.yaml 
+[root@k8s-master volumes]# kubectl apply -f pod-hostpath-vol.yaml
 pod/pod-vol-hostpath created
-[root@k8s-master volumes]# curl  10.244.2.37 
+[root@k8s-master volumes]# curl  10.244.2.37
 node02.magedu.com
 ```
 
 > hostPath可以实现持久存储，但是在node节点故障时，也会导致数据的丢失
 
-# 四、nfs共享存储卷演示
+## 四、nfs共享存储卷演示
 
 > nfs使的我们可以挂在已经存在的共享到的我们的Pod中，和emptyDir不同的是，emptyDir会被删除当我们的Pod被删除的时候，但是nfs不会被删除，仅仅是解除挂在状态而已，这就意味着NFS能够允许我们提前对数据进行处理，而且这些数据可以在Pod之间相互传递.并且，nfs可以同时被多个pod挂在并进行读写
 >
@@ -237,7 +239,7 @@ spec:
       nfs:
         path: /data/volumes
         server: stor01
-[root@k8s-master volumes]# kubectl apply -f pod-nfs-vol.yaml 
+[root@k8s-master volumes]# kubectl apply -f pod-nfs-vol.yaml
 pod/pod-vol-nfs created
 [root@k8s-master volumes]# kubectl get pods -o wide
 NAME                     READY     STATUS    RESTARTS   AGE       IP            NODE
@@ -251,10 +253,10 @@ pod-vol-nfs              1/1       Running   0          21s       10.244.2.38   
 <h1> nfs stor01</h1>
 [root@k8s-master volumes]# kubectl delete -f pod-nfs-vol.yaml   #删除nfs相关pod，再重新创建，可以得到数据的持久化存储
 pod "pod-vol-nfs" deleted
-[root@k8s-master volumes]# kubectl apply -f pod-nfs-vol.yaml 
+[root@k8s-master volumes]# kubectl apply -f pod-nfs-vol.yaml
 ```
 
-# 五、PVC和PV的概念
+## 五、PVC和PV的概念
 
 > 我们前面提到kubernetes提供那么多存储接口，但是首先kubernetes的各个Node节点能管理这些存储，但是各种存储参数也需要专业的存储工程师才能了解，由此我们的kubernetes管理变的更加复杂的。由此kubernetes提出了PV和PVC的概念，这样开发人员和使用者就不需要关注后端存储是什么，使用什么参数等问题。如下图：
 ![PVC和PV的概念](./static/1349539-20181010111022629-145101656.png)
@@ -303,7 +305,7 @@ Provisioning（配置）---> Binding（绑定）--->Using（使用）---> Releas
 
 > 如果受适当的卷插件支持，回收将对卷执行基本的擦除（rm -rf / thevolume / *），并使其再次可用于新的声明。
 
-# 六、NFS使用PV和PVC
+## 六、NFS使用PV和PVC
 
 > 实验图如下：
 ![NFS使用PV和PVC实验图如下](./static/1349539-20181010110937451-1076717702.png)
@@ -493,7 +495,7 @@ spec:
     - name: html
       persistentVolumeClaim:
         claimName: mypvc
-[root@k8s-master volumes]# kubectl apply -f pod-vol-pvc.yaml 
+[root@k8s-master volumes]# kubectl apply -f pod-vol-pvc.yaml
 persistentvolumeclaim/mypvc created
 pod/pod-vol-pvc created
 [root@k8s-master volumes]# kubectl get pv
@@ -520,7 +522,7 @@ pod-vol-pvc             1/1       Running   0          3m        10.244.2.39   k
 welcome to use pv3
 ```
 
-# 七、StorageClass
+## 七、StorageClass
 
 > 在pv和pvc使用过程中存在的问题，在pvc申请存储空间时，未必就有现成的pv符合pvc申请的需求，上面nfs在做pvc可以成功的因素是因为我们做了指定的需求处理。那么当PVC申请的存储空间不一定有满足PVC要求的PV事，又该如何处理呢？？？为此，Kubernetes为管理员提供了描述存储"class（类）"的方法（StorageClass）。举个例子，在存储系统中划分一个1TB的存储空间提供给Kubernetes使用，当用户需要一个10G的PVC时，会立即通过restful发送请求，从而让存储空间创建一个10G的image，之后在我们的集群中定义成10G的PV供给给当前的PVC作为挂载使用。在此之前我们的存储系统必须支持restful接口，比如ceph分布式存储，而glusterfs则需要借助第三方接口完成这样的请求。如图：
 ![StorageClass](./static/1349539-20181010160310479-848300996.png)
@@ -557,7 +559,7 @@ mountOptions:
   - debug
 ```
 
-# 八、配置容器应用：Secret和configMap
+## 八、配置容器应用：Secret和configMap
 
 > 在日常单机甚至集群状态下，我们需要对一个应用进行配置，只需要修改其配置文件即可。那么在容器中又该如何提供配置 信息呢？？？例如，为Nginx配置一个指定的server_name或worker进程数，为Tomcat的JVM配置其堆内存大小。传统的实践过程中通常有以下几种方式：
 
@@ -580,7 +582,7 @@ mountOptions:
      https://kubernetes.io/docs/concepts/storage/volumes#secret
 ```
 
-## 8.1、Secret解析
+### 8.1、Secret解析
 
 > Secret对象存储数据的方式是以键值方式存储数据，在Pod资源进行调用Secret的方式是通过环境变量或者存储卷的方式进行访问数据，解决了密码、token、密钥等敏感数据的配置问题，而不需要把这些敏感数据暴露到镜像或者Pod Spec中。另外，Secret对象的数据存储和打印格式为Base64编码的字符串，因此用户在创建Secret对象时，也需要提供该类型的编码格式的数据。在容器中以环境变量或存储卷的方式访问时，会自动解码为明文格式。需要注意的是，如果是在Master节点上，Secret对象以非加密的格式存储在etcd中，所以需要对etcd的管理和权限进行严格控制。
 >
@@ -624,7 +626,7 @@ mysecret                Opaque                                2         6s
 ```code
 [root@k8s-master ~]# echo -n admin > ./username
 [root@k8s-master ~]# echo -n 123456 > ./password
-[root@k8s-master ~]# kubectl create secret generic mysecret --from-file=./username --from-file=./password 
+[root@k8s-master ~]# kubectl create secret generic mysecret --from-file=./username --from-file=./password
 secret/mysecret created
 [root@k8s-master ~]# kubectl get secret
 NAME                    TYPE                                  DATA      AGE
@@ -638,7 +640,7 @@ mysecret                Opaque                                2         6s
 > username=admin
 > password=123456
 > EOF
-[root@k8s-master ~]# kubectl create secret generic mysecret --from-env-file=env.txt 
+[root@k8s-master ~]# kubectl create secret generic mysecret --from-env-file=env.txt
 secret/mysecret created
 [root@k8s-master ~]# kubectl get secret
 NAME                    TYPE                                  DATA      AGE
@@ -833,7 +835,7 @@ abcdef
 > 需要注意的是，环境变量读取 Secret 很方便，但无法支撑 Secret 动态更新。
 > Secret 可以为 Pod 提供密码、Token、私钥等敏感数据；对于一些非敏感数据，比如应用的配置信息，则可以用 ConfigMap。
 
-## 8.2、ConifgMap解析
+### 8.2、ConifgMap解析
 
 > configmap是让配置文件从镜像中解耦，让镜像的可移植性和可复制性。许多应用程序会从配置文件、命令行参数或环境变量中读取配置信息。这些配置信息需要与docker image解耦，你总不能每修改一个配置就重做一个image吧？ConfigMap API给我们提供了向容器中注入配置信息的机制，ConfigMap可以被用来保存单个属性，也可以用来保存整个配置文件或者JSON二进制大对象。
 > ConfigMap API资源用来保存key-value pair配置数据，这个数据可以在pods里使用，或者被用来为像controller一样的系统组件存储配置数据。虽然ConfigMap跟Secrets类似，但是ConfigMap更方便的处理不含敏感信息的字符串。 注意：ConfigMaps不是属性配置文件的替代品。ConfigMaps只是作为多个properties文件的引用。可以把它理解为Linux系统中的/etc目录，专门用来存储配置文件的目录。下面举个例子，使用ConfigMap配置来创建Kuberntes Volumes，ConfigMap中的每个data项都会成为一个新文件。
@@ -890,7 +892,7 @@ server {
     listen 80;
     root /data/web/html;
 }
-[root@k8s-master configmap]# kubectl create configmap nginx-www --from-file=./www.conf 
+[root@k8s-master configmap]# kubectl create configmap nginx-www --from-file=./www.conf
 configmap/nginx-www created
 [root@k8s-master configmap]# kubectl get cm
 NAME           DATA      AGE
