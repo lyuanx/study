@@ -1,0 +1,1366 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>存储卷 · lyuanx</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="lyuanx">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../job/job.html" />
+    
+    
+    <link rel="prev" href="../pod/pod.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"repo":"darrenliuwei/gitbook","types":["star"],"size":"small"};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    导读
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">kubernetes</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../pod/pod.html">
+            
+                <a href="../pod/pod.html">
+            
+                    
+                    pod
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.2" data-path="volumes.html">
+            
+                <a href="volumes.html">
+            
+                    
+                    存储卷
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../job/job.html">
+            
+                <a href="../job/job.html">
+            
+                    
+                    job
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../cronjob/cronjob.html">
+            
+                <a href="../cronjob/cronjob.html">
+            
+                    
+                    cronjob
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../ingress/ingress.html">
+            
+                <a href="../ingress/ingress.html">
+            
+                    
+                    ingress
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">helm</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../../helm/helm.html">
+            
+                <a href="../../helm/helm.html">
+            
+                    
+                    Kubernetes 应用部署的挑战
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">信管</li>
+        
+        
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >存储卷</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+                                <section class="normal markdown-section">
+                                
+                                <!-- toc -->
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%8D%B7">&#x6570;&#x636E;&#x5377;</a><ul>
+<li><a href="#%E4%B8%80%E3%80%81%E5%AD%98%E5%82%A8%E5%8D%B7%E7%9A%84%E6%A6%82%E5%BF%B5%E5%92%8C%E7%B1%BB%E5%9E%8B">&#x4E00;&#x3001;&#x5B58;&#x50A8;&#x5377;&#x7684;&#x6982;&#x5FF5;&#x548C;&#x7C7B;&#x578B;</a></li>
+<li><a href="#%E4%BA%8C%E3%80%81emptydir%E5%AD%98%E5%82%A8%E5%8D%B7%E6%BC%94%E7%A4%BA">&#x4E8C;&#x3001;emptyDir&#x5B58;&#x50A8;&#x5377;&#x6F14;&#x793A;</a></li>
+<li><a href="#%E4%B8%89%E3%80%81hostpath%E5%AD%98%E5%82%A8%E5%8D%B7%E6%BC%94%E7%A4%BA">&#x4E09;&#x3001;hostPath&#x5B58;&#x50A8;&#x5377;&#x6F14;&#x793A;</a></li>
+<li><a href="#%E5%9B%9B%E3%80%81nfs%E5%85%B1%E4%BA%AB%E5%AD%98%E5%82%A8%E5%8D%B7%E6%BC%94%E7%A4%BA">&#x56DB;&#x3001;nfs&#x5171;&#x4EAB;&#x5B58;&#x50A8;&#x5377;&#x6F14;&#x793A;</a></li>
+<li><a href="#%E4%BA%94%E3%80%81pvc%E5%92%8Cpv%E7%9A%84%E6%A6%82%E5%BF%B5">&#x4E94;&#x3001;PVC&#x548C;PV&#x7684;&#x6982;&#x5FF5;</a></li>
+<li><a href="#%E5%85%AD%E3%80%81nfs%E4%BD%BF%E7%94%A8pv%E5%92%8Cpvc">&#x516D;&#x3001;NFS&#x4F7F;&#x7528;PV&#x548C;PVC</a></li>
+<li><a href="#%E4%B8%83%E3%80%81storageclass">&#x4E03;&#x3001;StorageClass</a></li>
+<li><a href="#%E5%85%AB%E3%80%81%E9%85%8D%E7%BD%AE%E5%AE%B9%E5%99%A8%E5%BA%94%E7%94%A8%EF%BC%9Asecret%E5%92%8Cconfigmap">&#x516B;&#x3001;&#x914D;&#x7F6E;&#x5BB9;&#x5668;&#x5E94;&#x7528;&#xFF1A;Secret&#x548C;configMap</a><ul>
+<li><a href="#8.1%E3%80%81secret%E8%A7%A3%E6%9E%90">8.1&#x3001;Secret&#x89E3;&#x6790;</a></li>
+<li><a href="#8.2%E3%80%81conifgmap%E8%A7%A3%E6%9E%90">8.2&#x3001;ConifgMap&#x89E3;&#x6790;</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1 id="&#x6570;&#x636E;&#x5377;">&#x6570;&#x636E;&#x5377;</h1>
+<h2 id="&#x4E00;&#x3001;&#x5B58;&#x50A8;&#x5377;&#x7684;&#x6982;&#x5FF5;&#x548C;&#x7C7B;&#x578B;">&#x4E00;&#x3001;&#x5B58;&#x50A8;&#x5377;&#x7684;&#x6982;&#x5FF5;&#x548C;&#x7C7B;&#x578B;</h2>
+<blockquote>
+<p>&#x4E3A;&#x4E86;&#x4FDD;&#x8BC1;&#x6570;&#x636E;&#x7684;&#x6301;&#x4E45;&#x6027;&#xFF0C;&#x5FC5;&#x987B;&#x4FDD;&#x8BC1;&#x6570;&#x636E;&#x5728;&#x5916;&#x90E8;&#x5B58;&#x50A8;&#x5728;docker&#x5BB9;&#x5668;&#x4E2D;&#xFF0C;&#x4E3A;&#x4E86;&#x5B9E;&#x73B0;&#x6570;&#x636E;&#x7684;&#x6301;&#x4E45;&#x6027;&#x5B58;&#x50A8;&#xFF0C;&#x5728;&#x5BBF;&#x4E3B;&#x673A;&#x548C;&#x5BB9;&#x5668;&#x5185;&#x505A;&#x6620;&#x5C04;&#xFF0C;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x5728;&#x5BB9;&#x5668;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x7ED3;&#x675F;&#xFF0C;&#x6570;&#x636E;&#x4F9D;&#x65E7;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x6301;&#x4E45;&#x6027;&#x5B58;&#x50A8;&#x3002;&#x4F46;&#x662F;&#x5728;k8s&#x4E2D;&#xFF0C;&#x7531;&#x4E8E;pod&#x5206;&#x5E03;&#x5728;&#x5404;&#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x8282;&#x70B9;&#x4E4B;&#x4E0A;&#xFF0C;&#x5E76;&#x4E0D;&#x80FD;&#x5B9E;&#x73B0;&#x4E0D;&#x540C;&#x8282;&#x70B9;&#x4E4B;&#x95F4;&#x6301;&#x4E45;&#x6027;&#x6570;&#x636E;&#x7684;&#x5171;&#x4EAB;&#xFF0C;&#x5E76;&#x4E14;&#xFF0C;&#x5728;&#x8282;&#x70B9;&#x6545;&#x969C;&#x65F6;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x6570;&#x636E;&#x7684;&#x6C38;&#x4E45;&#x6027;&#x4E22;&#x5931;&#x3002;&#x4E3A;&#x6B64;&#xFF0C;k8s&#x5C31;&#x5F15;&#x5165;&#x4E86;&#x5916;&#x90E8;&#x5B58;&#x50A8;&#x5377;&#x7684;&#x529F;&#x80FD;&#x3002;
+k8s&#x7684;&#x5B58;&#x50A8;&#x5377;&#x7C7B;&#x578B;&#xFF1A;</p>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master ~]# kubectl explain pod.spec.volumes #&#x67E5;&#x770B;k8s&#x652F;&#x6301;&#x7684;&#x5B58;&#x50A8;&#x7C7B;&#x578B;
+KIND:     Pod
+VERSION:  v1
+
+&#x5E38;&#x7528;&#x5206;&#x7C7B;&#xFF1A;
+emptyDir&#xFF08;&#x4E34;&#x65F6;&#x76EE;&#x5F55;&#xFF09;:Pod&#x5220;&#x9664;&#xFF0C;&#x6570;&#x636E;&#x4E5F;&#x4F1A;&#x88AB;&#x6E05;&#x9664;&#xFF0C;&#x8FD9;&#x79CD;&#x5B58;&#x50A8;&#x6210;&#x4E3A;emptyDir&#xFF0C;&#x7528;&#x4E8E;&#x6570;&#x636E;&#x7684;&#x4E34;&#x65F6;&#x5B58;&#x50A8;&#x3002;
+hostPath(&#x5BBF;&#x4E3B;&#x673A;&#x76EE;&#x5F55;&#x6620;&#x5C04;):
+&#x672C;&#x5730;&#x7684;SAN(iSCSI,FC)&#x3001;NAS(nfs,cifs,http)&#x5B58;&#x50A8;
+&#x5206;&#x5E03;&#x5F0F;&#x5B58;&#x50A8;&#xFF08;glusterfs&#xFF0C;rbd&#xFF0C;cephfs&#xFF09;
+&#x4E91;&#x5B58;&#x50A8;&#xFF08;EBS&#xFF0C;Azure Disk&#xFF09;
+</code></pre>
+<blockquote>
+<p>persistentVolumeClaim --&gt;PVC(&#x5B58;&#x50A8;&#x5377;&#x521B;&#x5EFA;&#x7533;&#x8BF7;)&#x5F53;&#x4F60;&#x9700;&#x8981;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5B58;&#x50A8;&#x5377;&#x65F6;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x7533;&#x8BF7;&#x5BF9;&#x5E94;&#x7684;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x5373;&#x53EF;&#x4F7F;&#x7528;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;PVC&#x3002;&#x5176;&#x5173;&#x8054;&#x5173;&#x7CFB;&#x5982;&#x56FE;&#xFF1A;
+<img src="static/1349539-20181009150238161-243800675.png" alt="persistentVolumeClaim"></p>
+<p>&#x4E0A;&#x56FE;&#x89E3;&#x6790;&#xFF1A;&#x5728;Pod&#x4E0A;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;PVC&#xFF0C;&#x8BE5;PVC&#x8981;&#x5173;&#x8054;&#x5230;&#x5F53;&#x524D;&#x540D;&#x79F0;&#x7A7A;&#x95F4;&#x7684;PVC&#x8D44;&#x6E90;&#xFF0C;&#x8BE5;PVC&#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x7533;&#x8BF7;&#xFF0C;PVC&#x9700;&#x8981;&#x548C;PV&#x8FDB;&#x884C;&#x5173;&#x8054;&#x3002;PV&#x5C5E;&#x4E8E;&#x5B58;&#x50A8;&#x4E0A;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x3002;&#x4F46;&#x662F;&#x8BE5;&#x65B9;&#x6848;&#x5B58;&#x5728;&#x7684;&#x95EE;&#x9898;&#x662F;&#xFF0C;&#x6211;&#x4EEC;&#x65E0;&#x6CD5;&#x77E5;&#x9053;&#x7528;&#x6237;&#x662F;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x53BB;&#x521B;&#x5EFA;Pod&#xFF0C;&#x4E5F;&#x4E0D;&#x77E5;&#x9053;&#x521B;&#x5EFA;Pod&#x65F6;&#x5B9A;&#x4E49;&#x591A;&#x5927;&#x7684;PVC&#xFF0C;&#x90A3;&#x4E48;&#x5982;&#x4F55;&#x5B9E;&#x73B0;&#x6309;&#x9700;&#x521B;&#x5EFA;&#x5462;&#xFF1F;&#xFF1F;&#xFF1F;</p>
+<p>&#x4E0D;&#x9700;&#x8981;PV&#x5C42;&#xFF0C;&#x628A;&#x6240;&#x6709;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x62BD;&#x8C61;&#x51FA;&#x6765;&#xFF0C;&#x8FD9;&#x4E00;&#x4E2A;&#x62BD;&#x8C61;&#x5C42;&#x79F0;&#x4E3A;&#x5B58;&#x50A8;&#x7C7B;&#xFF0C;&#x5F53;&#x7528;&#x6237;&#x521B;&#x5EFA;PVC&#x9700;&#x8981;&#x7528;&#x5230;PV&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x5411;&#x5B58;&#x50A8;&#x7C7B;&#x7533;&#x8BF7;&#x5BF9;&#x5E94;&#x7684;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#xFF0C;&#x5B58;&#x50A8;&#x7C7B;&#x4F1A;&#x6309;&#x7167;&#x9700;&#x6C42;&#x521B;&#x5EFA;&#x5BF9;&#x5E94;&#x7684;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;PV&#x7684;&#x52A8;&#x6001;&#x4F9B;&#x7ED9;&#xFF0C;&#x5982;&#x56FE;&#xFF1A;
+<img src="static/1349539-20181009150251762-2029671134.png" alt="noPersistentVolumeClaim">
+&#x90A3;&#x4E48;PV&#x7684;&#x52A8;&#x6001;&#x4F9B;&#x7ED9;&#xFF0C;&#x5176;&#x91CD;&#x70B9;&#x662F;&#x5728;&#x5B58;&#x50A8;&#x7C7B;&#x7684;&#x5B9A;&#x4E49;&#xFF0C;&#x5176;&#x5206;&#x7C7B;&#x5927;&#x6982;&#x662F;&#x5BF9;&#x5B58;&#x50A8;&#x7684;&#x6027;&#x80FD;&#x8FDB;&#x884C;&#x5206;&#x7C7B;&#x7684;&#xFF0C;&#x5982;&#x56FE;&#xFF1A;&#x91D1;&#x5B58;&#x50A8;&#x7C7B;&#x3001;&#x94F6;&#x5B58;&#x50A8;&#x7C7B;&#x3001;&#x94DC;&#x5B58;&#x50A8;&#x7C7B;&#x7B49;&#x3002;</p>
+<p>&#x603B;&#x7ED3;&#xFF1A;
+k8s&#x8981;&#x4F7F;&#x7528;&#x5B58;&#x50A8;&#x5377;&#xFF0C;&#x9700;&#x8981;2&#x6B65;&#xFF1A;
+1&#x3001;&#x5728;pod&#x5B9A;&#x4E49;volume&#xFF0C;&#x5E76;&#x6307;&#x660E;&#x5173;&#x8054;&#x5230;&#x54EA;&#x4E2A;&#x5B58;&#x50A8;&#x8BBE;&#x5907;
+2&#x3001;&#x5728;&#x5BB9;&#x5668;&#x4F7F;&#x7528;volume mount&#x8FDB;&#x884C;&#x6302;&#x8F7D;</p>
+</blockquote>
+<h2 id="&#x4E8C;&#x3001;emptydir&#x5B58;&#x50A8;&#x5377;&#x6F14;&#x793A;">&#x4E8C;&#x3001;emptyDir&#x5B58;&#x50A8;&#x5377;&#x6F14;&#x793A;</h2>
+<blockquote>
+<p>&#x4E00;&#x4E2A;emptyDir &#x7B2C;&#x4E00;&#x6B21;&#x521B;&#x5EFA;&#x662F;&#x5728;&#x4E00;&#x4E2A;pod&#x88AB;&#x6307;&#x5B9A;&#x5230;&#x5177;&#x4F53;node&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5E76;&#x4E14;&#x4F1A;&#x4E00;&#x76F4;&#x5B58;&#x5728;&#x5728;pod&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x5F53;&#x4E2D;&#xFF0C;&#x6B63;&#x5982;&#x5B83;&#x7684;&#x540D;&#x5B57;&#x4E00;&#x6837;&#xFF0C;&#x5B83;&#x521D;&#x59CB;&#x5316;&#x662F;&#x4E00;&#x4E2A;&#x7A7A;&#x7684;&#x76EE;&#x5F55;&#xFF0C;pod&#x4E2D;&#x7684;&#x5BB9;&#x5668;&#x90FD;&#x53EF;&#x4EE5;&#x8BFB;&#x5199;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x53EF;&#x4EE5;&#x88AB;&#x6302;&#x5728;&#x5230;&#x5404;&#x4E2A;&#x5BB9;&#x5668;&#x76F8;&#x540C;&#x6216;&#x8005;&#x4E0D;&#x76F8;&#x540C;&#x7684;&#x7684;&#x8DEF;&#x5F84;&#x4E0B;&#x3002;&#x5F53;&#x4E00;&#x4E2A;pod&#x56E0;&#x4E3A;&#x4EFB;&#x4F55;&#x539F;&#x56E0;&#x88AB;&#x79FB;&#x9664;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#x4F1A;&#x88AB;&#x6C38;&#x4E45;&#x5220;&#x9664;&#x3002;&#x6CE8;&#x610F;&#xFF1A;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#x5D29;&#x6E83;&#x4E86;&#x4E0D;&#x4F1A;&#x5BFC;&#x81F4;&#x6570;&#x636E;&#x7684;&#x4E22;&#x5931;&#xFF0C;&#x56E0;&#x4E3A;&#x5BB9;&#x5668;&#x7684;&#x5D29;&#x6E83;&#x5E76;&#x4E0D;&#x79FB;&#x9664;pod.</p>
+<p>emptyDir &#x78C1;&#x76D8;&#x7684;&#x4F5C;&#x7528;&#xFF1A;
+&#xFF08;1&#xFF09;&#x666E;&#x901A;&#x7A7A;&#x95F4;&#xFF0C;&#x57FA;&#x4E8E;&#x78C1;&#x76D8;&#x7684;&#x6570;&#x636E;&#x5B58;&#x50A8;
+&#xFF08;2&#xFF09;&#x4F5C;&#x4E3A;&#x4ECE;&#x5D29;&#x6E83;&#x4E2D;&#x6062;&#x590D;&#x7684;&#x5907;&#x4EFD;&#x70B9;
+&#xFF08;3&#xFF09;&#x5B58;&#x50A8;&#x90A3;&#x4E9B;&#x90A3;&#x4E9B;&#x9700;&#x8981;&#x957F;&#x4E45;&#x4FDD;&#x5B58;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x4F8B;web&#x670D;&#x52A1;&#x4E2D;&#x7684;&#x6570;&#x636E;
+&#x9ED8;&#x8BA4;&#x7684;&#xFF0C;emptyDir &#x78C1;&#x76D8;&#x4F1A;&#x5B58;&#x50A8;&#x5728;&#x4E3B;&#x673A;&#x6240;&#x4F7F;&#x7528;&#x7684;&#x5A92;&#x4ECB;&#x4E0A;&#xFF0C;&#x53EF;&#x80FD;&#x662F;SSD&#xFF0C;&#x6216;&#x8005;&#x7F51;&#x7EDC;&#x786C;&#x76D8;&#xFF0C;&#x8FD9;&#x4E3B;&#x8981;&#x53D6;&#x51B3;&#x4E8E;&#x4F60;&#x7684;&#x73AF;&#x5883;&#x3002;&#x5F53;&#x7136;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x5C06; emptyDir.medium&#x7684;&#x503C;&#x8BBE;&#x7F6E;&#x4E3A;Memory&#x6765;&#x544A;&#x8BC9;Kubernetes &#x6765;&#x6302;&#x5728;&#x4E00;&#x4E2A;&#x57FA;&#x4E8E;&#x5185;&#x5B58;&#x7684;&#x76EE;&#x5F55;tmpfs&#xFF0C;&#x56E0;&#x4E3A;
+tmpfs&#x901F;&#x5EA6;&#x4F1A;&#x6BD4;&#x786C;&#x76D8;&#x5757;&#x5EA6;&#x4E86;&#xFF0C;&#x4F46;&#x662F;&#xFF0C;&#x5F53;&#x4E3B;&#x673A;&#x91CD;&#x542F;&#x7684;&#x65F6;&#x5019;&#x6240;&#x6709;&#x7684;&#x6570;&#x636E;&#x90FD;&#x4F1A;&#x4E22;&#x5931;&#x3002;</p>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master ~]# kubectl explain pods.spec.volumes.emptyDir  #&#x67E5;&#x770B;emptyDir&#x5B58;&#x50A8;&#x5B9A;&#x4E49;
+[root@k8s-master ~]# kubectl explain pods.spec.containers.volumeMounts  #&#x67E5;&#x770B;&#x5BB9;&#x5668;&#x6302;&#x8F7D;&#x65B9;&#x5F0F;
+[root@k8s-master ~]# cd mainfests &amp;&amp; mkdir volumes &amp;&amp; cd volumes
+[root@k8s-master volumes]# cp ../pod-demo.yaml ./
+[root@k8s-master volumes]# mv pod-demo.yaml pod-vol-demo.yaml
+[root@k8s-master volumes]# vim pod-vol-demo.yaml   #&#x521B;&#x5EFA;emptyDir&#x7684;&#x6E05;&#x5355;
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-demo
+  namespace: default
+  labels:
+    app: myapp
+    tier: frontend
+  annotations:
+    magedu.com/create-by:&quot;cluster admin&quot;
+spec:
+  containers:
+  - name: myapp
+    image: ikubernetes/myapp:v1
+    imagePullPolicy: IfNotPresent
+    ports:
+    - name: http
+      containerPort: 80
+    volumeMounts:    #&#x5728;&#x5BB9;&#x5668;&#x5185;&#x5B9A;&#x4E49;&#x6302;&#x8F7D;&#x5B58;&#x50A8;&#x540D;&#x79F0;&#x548C;&#x6302;&#x8F7D;&#x8DEF;&#x5F84;
+    - name: html
+      mountPath: /usr/share/nginx/html/
+  - name: busybox
+    image: busybox:latest
+    imagePullPolicy: IfNotPresent
+    volumeMounts:
+    - name: html
+      mountPath: /data/    #&#x5728;&#x5BB9;&#x5668;&#x5185;&#x5B9A;&#x4E49;&#x6302;&#x8F7D;&#x5B58;&#x50A8;&#x540D;&#x79F0;&#x548C;&#x6302;&#x8F7D;&#x8DEF;&#x5F84;
+    command: [&apos;/bin/sh&apos;,&apos;-c&apos;,&apos;while true;do echo $(date) &gt;&gt; /data/index.html;sleep 2;done&apos;]
+  volumes:  #&#x5B9A;&#x4E49;&#x5B58;&#x50A8;&#x5377;
+  - name: html    #&#x5B9A;&#x4E49;&#x5B58;&#x50A8;&#x5377;&#x540D;&#x79F0;  
+    emptyDir: {}  #&#x5B9A;&#x4E49;&#x5B58;&#x50A8;&#x5377;&#x7C7B;&#x578B;
+[root@k8s-master volumes]# kubectl apply -f pod-vol-demo.yaml
+pod/pod-vol-demo created
+[root@k8s-master volumes]# kubectl get pods
+NAME                                 READY     STATUS    RESTARTS   AGE
+pod-vol-demo                         2/2       Running   0          27s
+[root@k8s-master volumes]# kubectl get pods -o wide
+NAME                      READY     STATUS    RESTARTS   AGE       IP            NODE
+......
+pod-vol-demo              2/2       Running   0          16s       10.244.2.34   k8s-node02
+......
+
+&#x5728;&#x4E0A;&#x9762;&#xFF0C;&#x6211;&#x4EEC;&#x5B9A;&#x4E49;&#x4E86;2&#x4E2A;&#x5BB9;&#x5668;&#xFF0C;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;&#x662F;&#x8F93;&#x5165;&#x65E5;&#x671F;&#x5230;index.html&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x9A8C;&#x8BC1;&#x8BBF;&#x95EE;nginx&#x7684;html&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x65E5;&#x671F;&#x3002;&#x4EE5;&#x9A8C;&#x8BC1;&#x4E24;&#x4E2A;&#x5BB9;&#x5668;&#x4E4B;&#x95F4;&#x6302;&#x8F7D;&#x7684;emptyDir&#x5B9E;&#x73B0;&#x5171;&#x4EAB;&#x3002;&#x5982;&#x4E0B;&#x8BBF;&#x95EE;&#x9A8C;&#x8BC1;:
+[root@k8s-master volumes]# curl 10.244.2.34  #&#x8BBF;&#x95EE;&#x9A8C;&#x8BC1;
+Tue Oct 9 03:56:53 UTC 2018
+Tue Oct 9 03:56:55 UTC 2018
+Tue Oct 9 03:56:57 UTC 2018
+Tue Oct 9 03:56:59 UTC 2018
+Tue Oct 9 03:57:01 UTC 2018
+Tue Oct 9 03:57:03 UTC 2018
+Tue Oct 9 03:57:05 UTC 2018
+Tue Oct 9 03:57:07 UTC 2018
+Tue Oct 9 03:57:09 UTC 2018
+Tue Oct 9 03:57:11 UTC 2018
+Tue Oct 9 03:57:13 UTC 2018
+Tue Oct 9 03:57:15 UTC 2018
+</code></pre>
+<h2 id="&#x4E09;&#x3001;hostpath&#x5B58;&#x50A8;&#x5377;&#x6F14;&#x793A;">&#x4E09;&#x3001;hostPath&#x5B58;&#x50A8;&#x5377;&#x6F14;&#x793A;</h2>
+<blockquote>
+<p>hostPath&#x5BBF;&#x4E3B;&#x673A;&#x8DEF;&#x5F84;&#xFF0C;&#x5C31;&#x662F;&#x628A;pod&#x6240;&#x5728;&#x7684;&#x5BBF;&#x4E3B;&#x673A;&#x4E4B;&#x4E0A;&#x7684;&#x8131;&#x79BB;pod&#x4E2D;&#x7684;&#x5BB9;&#x5668;&#x540D;&#x79F0;&#x7A7A;&#x95F4;&#x7684;&#x4E4B;&#x5916;&#x7684;&#x5BBF;&#x4E3B;&#x673A;&#x7684;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x7684;&#x67D0;&#x4E00;&#x76EE;&#x5F55;&#x548C;pod&#x5EFA;&#x7ACB;&#x5173;&#x8054;&#x5173;&#x7CFB;&#xFF0C;&#x5728;pod&#x5220;&#x9664;&#x65F6;&#xFF0C;&#x5B58;&#x50A8;&#x6570;&#x636E;&#x4E0D;&#x4F1A;&#x4E22;&#x5931;&#x3002;</p>
+</blockquote>
+<pre><code class="lang-code">&#xFF08;1&#xFF09;&#x67E5;&#x770B;hostPath&#x5B58;&#x50A8;&#x7C7B;&#x578B;&#x5B9A;&#x4E49;
+[root@k8s-master volumes]# kubectl explain pods.spec.volumes.hostPath  
+KIND:     Pod
+VERSION:  v1
+
+RESOURCE: hostPath &lt;Object&gt;
+
+DESCRIPTION:
+     HostPath represents a pre-existing file or directory on the host machine
+     that is directly exposed to the container. This is generally used for
+     system agents or other privileged things that are allowed to see the host
+     machine. Most containers will NOT need this. More info:
+     https://kubernetes.io/docs/concepts/storage/volumes#hostpath
+
+     Represents a host path mapped into a pod. Host path volumes do not support
+     ownership management or SELinux relabeling.
+
+FIELDS:
+   path &lt;string&gt; -required-  #&#x6307;&#x5B9A;&#x5BBF;&#x4E3B;&#x673A;&#x7684;&#x8DEF;&#x5F84;
+     Path of the directory on the host. If the path is a symlink, it will follow
+     the link to the real path. More info:
+     https://kubernetes.io/docs/concepts/storage/volumes#hostpath
+
+   type &lt;string&gt;
+     Type for HostPath Volume Defaults to &quot;&quot; More info:
+     https://kubernetes.io/docs/concepts/storage/volumes#hostpath
+
+type&#xFF1A;
+DirectoryOrCreate  &#x5BBF;&#x4E3B;&#x673A;&#x4E0A;&#x4E0D;&#x5B58;&#x5728;&#x521B;&#x5EFA;&#x6B64;&#x76EE;&#x5F55;  
+Directory &#x5FC5;&#x987B;&#x5B58;&#x5728;&#x6302;&#x8F7D;&#x76EE;&#x5F55;  
+FileOrCreate &#x5BBF;&#x4E3B;&#x673A;&#x4E0A;&#x4E0D;&#x5B58;&#x5728;&#x6302;&#x8F7D;&#x6587;&#x4EF6;&#x5C31;&#x521B;&#x5EFA;  
+File &#x5FC5;&#x987B;&#x5B58;&#x5728;&#x6587;&#x4EF6;  
+
+&#xFF08;2&#xFF09;&#x6E05;&#x5355;&#x5B9A;&#x4E49;
+[root@k8s-master volumes]# vim pod-hostpath-vol.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-vol-hostpath
+  namespace: default
+spec:
+  containers:
+  - name: myapp
+    image: ikubernetes/myapp:v1
+    volumeMounts:
+    - name: html
+      mountPath: /usr/share/nginx/html
+  volumes:
+    - name: html
+      hostPath:
+        path: /data/pod/volume1
+        type: DirectoryOrCreate
+
+&#xFF08;3&#xFF09;&#x5728;node&#x8282;&#x70B9;&#x4E0A;&#x521B;&#x5EFA;&#x6302;&#x8F7D;&#x76EE;&#x5F55;
+[root@k8s-node01 ~]# mkdir -p /data/pod/volume1
+[root@k8s-node01 ~]# vim /data/pod/volume1/index.html
+node01.magedu.com
+[root@k8s-node02 ~]# mkdir -p /data/pod/volume1
+[root@k8s-node02 ~]# vim /data/pod/volume1/index.html
+node02.magedu.com
+[root@k8s-master volumes]# kubectl apply -f pod-hostpath-vol.yaml
+pod/pod-vol-hostpath created
+
+&#xFF08;4&#xFF09;&#x8BBF;&#x95EE;&#x6D4B;&#x8BD5;
+[root@k8s-master volumes]# kubectl get pods -o wide
+NAME                                 READY     STATUS    RESTARTS   AGE       IP            NODE
+......
+pod-vol-hostpath                     1/1       Running   0          37s       10.244.2.35   k8s-node02
+......
+[root@k8s-master volumes]# curl 10.244.2.35
+node02.magedu.com
+[root@k8s-master volumes]# kubectl delete -f pod-hostpath-vol.yaml  #&#x5220;&#x9664;pod&#xFF0C;&#x518D;&#x91CD;&#x5EFA;&#xFF0C;&#x9A8C;&#x8BC1;&#x662F;&#x5426;&#x4F9D;&#x65E7;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x539F;&#x6765;&#x7684;&#x5185;&#x5BB9;
+[root@k8s-master volumes]# kubectl apply -f pod-hostpath-vol.yaml
+pod/pod-vol-hostpath created
+[root@k8s-master volumes]# curl  10.244.2.37
+node02.magedu.com
+</code></pre>
+<blockquote>
+<p>hostPath&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x6301;&#x4E45;&#x5B58;&#x50A8;&#xFF0C;&#x4F46;&#x662F;&#x5728;node&#x8282;&#x70B9;&#x6545;&#x969C;&#x65F6;&#xFF0C;&#x4E5F;&#x4F1A;&#x5BFC;&#x81F4;&#x6570;&#x636E;&#x7684;&#x4E22;&#x5931;</p>
+</blockquote>
+<h2 id="&#x56DB;&#x3001;nfs&#x5171;&#x4EAB;&#x5B58;&#x50A8;&#x5377;&#x6F14;&#x793A;">&#x56DB;&#x3001;nfs&#x5171;&#x4EAB;&#x5B58;&#x50A8;&#x5377;&#x6F14;&#x793A;</h2>
+<blockquote>
+<p>nfs&#x4F7F;&#x7684;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6302;&#x5728;&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x7684;&#x5171;&#x4EAB;&#x5230;&#x7684;&#x6211;&#x4EEC;&#x7684;Pod&#x4E2D;&#xFF0C;&#x548C;emptyDir&#x4E0D;&#x540C;&#x7684;&#x662F;&#xFF0C;emptyDir&#x4F1A;&#x88AB;&#x5220;&#x9664;&#x5F53;&#x6211;&#x4EEC;&#x7684;Pod&#x88AB;&#x5220;&#x9664;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x4F46;&#x662F;nfs&#x4E0D;&#x4F1A;&#x88AB;&#x5220;&#x9664;&#xFF0C;&#x4EC5;&#x4EC5;&#x662F;&#x89E3;&#x9664;&#x6302;&#x5728;&#x72B6;&#x6001;&#x800C;&#x5DF2;&#xFF0C;&#x8FD9;&#x5C31;&#x610F;&#x5473;&#x7740;NFS&#x80FD;&#x591F;&#x5141;&#x8BB8;&#x6211;&#x4EEC;&#x63D0;&#x524D;&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x800C;&#x4E14;&#x8FD9;&#x4E9B;&#x6570;&#x636E;&#x53EF;&#x4EE5;&#x5728;Pod&#x4E4B;&#x95F4;&#x76F8;&#x4E92;&#x4F20;&#x9012;.&#x5E76;&#x4E14;&#xFF0C;nfs&#x53EF;&#x4EE5;&#x540C;&#x65F6;&#x88AB;&#x591A;&#x4E2A;pod&#x6302;&#x5728;&#x5E76;&#x8FDB;&#x884C;&#x8BFB;&#x5199;</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;&#x5FC5;&#x987B;&#x5148;&#x62A5;&#x7EB8;NFS&#x670D;&#x52A1;&#x5668;&#x6B63;&#x5E38;&#x8FD0;&#x884C;&#x5728;&#x6211;&#x4EEC;&#x8FDB;&#x884C;&#x6302;&#x5728;nfs&#x7684;&#x65F6;&#x5019;</p>
+</blockquote>
+<pre><code class="lang-code">&#xFF08;1&#xFF09;&#x5728;stor01&#x8282;&#x70B9;&#x4E0A;&#x5B89;&#x88C5;nfs&#xFF0C;&#x5E76;&#x914D;&#x7F6E;nfs&#x670D;&#x52A1;
+[root@stor01 ~]# yum install -y nfs-utils  ==&#x300B;192.168.56.14
+[root@stor01 ~]# mkdir /data/volumes -pv
+[root@stor01 ~]# vim /etc/exports
+/data/volumes 192.168.56.0/24(rw,no_root_squash)
+[root@stor01 ~]# systemctl start nfs
+[root@stor01 ~]# showmount -e
+Export list for stor01:
+/data/volumes 192.168.56.0/24
+
+&#xFF08;2&#xFF09;&#x5728;node01&#x548C;node02&#x8282;&#x70B9;&#x4E0A;&#x5B89;&#x88C5;nfs-utils&#xFF0C;&#x5E76;&#x6D4B;&#x8BD5;&#x6302;&#x8F7D;
+[root@k8s-node01 ~]# yum install -y nfs-utils
+[root@k8s-node02 ~]# yum install -y nfs-utils
+[root@k8s-node02 ~]# mount -t nfs stor01:/data/volumes /mnt
+[root@k8s-node02 ~]# mount
+......
+stor01:/data/volumes on /mnt type nfs4 (rw,relatime,vers=4.1,rsize=131072,wsize=131072,namlen=255,hard,proto=tcp,port=0,timeo=600,retrans=2,sec=sys,clientaddr=192.168.56.13,local_lock=none,addr=192.168.56.14)
+[root@k8s-node02 ~]# umount /mnt/
+
+&#xFF08;3&#xFF09;&#x521B;&#x5EFA;nfs&#x5B58;&#x50A8;&#x5377;&#x7684;&#x4F7F;&#x7528;&#x6E05;&#x5355;
+[root@k8s-master volumes]# cp pod-hostpath-vol.yaml pod-nfs-vol.yaml
+[root@k8s-master volumes]# vim pod-nfs-vol.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-vol-nfs
+  namespace: default
+spec:
+  containers:
+  - name: myapp
+    image: ikubernetes/myapp:v1
+    volumeMounts:
+    - name: html
+      mountPath: /usr/share/nginx/html
+  volumes:
+    - name: html
+      nfs:
+        path: /data/volumes
+        server: stor01
+[root@k8s-master volumes]# kubectl apply -f pod-nfs-vol.yaml
+pod/pod-vol-nfs created
+[root@k8s-master volumes]# kubectl get pods -o wide
+NAME                     READY     STATUS    RESTARTS   AGE       IP            NODE
+pod-vol-nfs              1/1       Running   0          21s       10.244.2.38   k8s-node02
+
+&#xFF08;3&#xFF09;&#x5728;nfs&#x670D;&#x52A1;&#x5668;&#x4E0A;&#x521B;&#x5EFA;index.html
+[root@stor01 ~]# cd /data/volumes
+[root@stor01 volumes ~]# vim index.html
+&lt;h1&gt; nfs stor01&lt;/h1&gt;
+[root@k8s-master volumes]# curl 10.244.2.38
+&lt;h1&gt; nfs stor01&lt;/h1&gt;
+[root@k8s-master volumes]# kubectl delete -f pod-nfs-vol.yaml   #&#x5220;&#x9664;nfs&#x76F8;&#x5173;pod&#xFF0C;&#x518D;&#x91CD;&#x65B0;&#x521B;&#x5EFA;&#xFF0C;&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x6570;&#x636E;&#x7684;&#x6301;&#x4E45;&#x5316;&#x5B58;&#x50A8;
+pod &quot;pod-vol-nfs&quot; deleted
+[root@k8s-master volumes]# kubectl apply -f pod-nfs-vol.yaml
+</code></pre>
+<h2 id="&#x4E94;&#x3001;pvc&#x548C;pv&#x7684;&#x6982;&#x5FF5;">&#x4E94;&#x3001;PVC&#x548C;PV&#x7684;&#x6982;&#x5FF5;</h2>
+<blockquote>
+<p>&#x6211;&#x4EEC;&#x524D;&#x9762;&#x63D0;&#x5230;kubernetes&#x63D0;&#x4F9B;&#x90A3;&#x4E48;&#x591A;&#x5B58;&#x50A8;&#x63A5;&#x53E3;&#xFF0C;&#x4F46;&#x662F;&#x9996;&#x5148;kubernetes&#x7684;&#x5404;&#x4E2A;Node&#x8282;&#x70B9;&#x80FD;&#x7BA1;&#x7406;&#x8FD9;&#x4E9B;&#x5B58;&#x50A8;&#xFF0C;&#x4F46;&#x662F;&#x5404;&#x79CD;&#x5B58;&#x50A8;&#x53C2;&#x6570;&#x4E5F;&#x9700;&#x8981;&#x4E13;&#x4E1A;&#x7684;&#x5B58;&#x50A8;&#x5DE5;&#x7A0B;&#x5E08;&#x624D;&#x80FD;&#x4E86;&#x89E3;&#xFF0C;&#x7531;&#x6B64;&#x6211;&#x4EEC;&#x7684;kubernetes&#x7BA1;&#x7406;&#x53D8;&#x7684;&#x66F4;&#x52A0;&#x590D;&#x6742;&#x7684;&#x3002;&#x7531;&#x6B64;kubernetes&#x63D0;&#x51FA;&#x4E86;PV&#x548C;PVC&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x8FD9;&#x6837;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x548C;&#x4F7F;&#x7528;&#x8005;&#x5C31;&#x4E0D;&#x9700;&#x8981;&#x5173;&#x6CE8;&#x540E;&#x7AEF;&#x5B58;&#x50A8;&#x662F;&#x4EC0;&#x4E48;&#xFF0C;&#x4F7F;&#x7528;&#x4EC0;&#x4E48;&#x53C2;&#x6570;&#x7B49;&#x95EE;&#x9898;&#x3002;&#x5982;&#x4E0B;&#x56FE;&#xFF1A;
+<img src="static/1349539-20181010111022629-145101656.png" alt="PVC&#x548C;PV&#x7684;&#x6982;&#x5FF5;">
+PersistentVolume&#xFF08;PV&#xFF09;&#x662F;&#x96C6;&#x7FA4;&#x4E2D;&#x5DF2;&#x7531;&#x7BA1;&#x7406;&#x5458;&#x914D;&#x7F6E;&#x7684;&#x4E00;&#x6BB5;&#x7F51;&#x7EDC;&#x5B58;&#x50A8;&#x3002; &#x96C6;&#x7FA4;&#x4E2D;&#x7684;&#x8D44;&#x6E90;&#x5C31;&#x50CF;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x662F;&#x4E00;&#x4E2A;&#x96C6;&#x7FA4;&#x8D44;&#x6E90;&#x3002; PV&#x662F;&#x8BF8;&#x5982;&#x5377;&#x4E4B;&#x7C7B;&#x7684;&#x5377;&#x63D2;&#x4EF6;&#xFF0C;&#x4F46;&#x662F;&#x5177;&#x6709;&#x72EC;&#x7ACB;&#x4E8E;&#x4F7F;&#x7528;PV&#x7684;&#x4EFB;&#x4F55;&#x5355;&#x4E2A;pod&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x3002; &#x8BE5;API&#x5BF9;&#x8C61;&#x6355;&#x83B7;&#x5B58;&#x50A8;&#x7684;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;&#xFF0C;&#x5373;NFS&#xFF0C;iSCSI&#x6216;&#x4E91;&#x63D0;&#x4F9B;&#x5546;&#x7279;&#x5B9A;&#x7684;&#x5B58;&#x50A8;&#x7CFB;&#x7EDF;&#x3002;
+<img src="static/1349539-20181010111035655-819686452.png" alt="PersistentVolume">
+PersistentVolumeClaim&#xFF08;PVC&#xFF09;&#x662F;&#x7528;&#x6237;&#x5B58;&#x50A8;&#x7684;&#x8BF7;&#x6C42;&#x3002;PVC&#x7684;&#x4F7F;&#x7528;&#x903B;&#x8F91;&#xFF1A;&#x5728;pod&#x4E2D;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x5B58;&#x50A8;&#x5377;&#xFF08;&#x8BE5;&#x5B58;&#x50A8;&#x5377;&#x7C7B;&#x578B;&#x4E3A;PVC&#xFF09;&#xFF0C;&#x5B9A;&#x4E49;&#x7684;&#x65F6;&#x5019;&#x76F4;&#x63A5;&#x6307;&#x5B9A;&#x5927;&#x5C0F;&#xFF0C;pvc&#x5FC5;&#x987B;&#x4E0E;&#x5BF9;&#x5E94;&#x7684;pv&#x5EFA;&#x7ACB;&#x5173;&#x7CFB;&#xFF0C;pvc&#x4F1A;&#x6839;&#x636E;&#x5B9A;&#x4E49;&#x53BB;pv&#x7533;&#x8BF7;&#xFF0C;&#x800C;pv&#x662F;&#x7531;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x521B;&#x5EFA;&#x51FA;&#x6765;&#x7684;&#x3002;pv&#x548C;pvc&#x662F;kubernetes&#x62BD;&#x8C61;&#x51FA;&#x6765;&#x7684;&#x4E00;&#x79CD;&#x5B58;&#x50A8;&#x8D44;&#x6E90;&#x3002;</p>
+<p>&#x867D;&#x7136;PersistentVolumeClaims&#x5141;&#x8BB8;&#x7528;&#x6237;&#x4F7F;&#x7528;&#x62BD;&#x8C61;&#x5B58;&#x50A8;&#x8D44;&#x6E90;&#xFF0C;&#x4F46;&#x662F;&#x5E38;&#x89C1;&#x7684;&#x9700;&#x6C42;&#x662F;&#xFF0C;&#x7528;&#x6237;&#x9700;&#x8981;&#x6839;&#x636E;&#x4E0D;&#x540C;&#x7684;&#x9700;&#x6C42;&#x53BB;&#x521B;&#x5EFA;PV&#xFF0C;&#x7528;&#x4E8E;&#x4E0D;&#x540C;&#x7684;&#x573A;&#x666F;&#x3002;&#x800C;&#x6B64;&#x65F6;&#x9700;&#x8981;&#x96C6;&#x7FA4;&#x7BA1;&#x7406;&#x5458;&#x63D0;&#x4F9B;&#x4E0D;&#x540C;&#x9700;&#x6C42;&#x7684;PV&#xFF0C;&#x800C;&#x4E0D;&#x4EC5;&#x4EC5;&#x662F;PV&#x7684;&#x5927;&#x5C0F;&#x548C;&#x8BBF;&#x95EE;&#x6A21;&#x5F0F;&#xFF0C;&#x4F46;&#x53C8;&#x4E0D;&#x9700;&#x8981;&#x7528;&#x6237;&#x4E86;&#x89E3;&#x8FD9;&#x4E9B;&#x5377;&#x7684;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;&#x3002; &#x5BF9;&#x4E8E;&#x8FD9;&#x6837;&#x7684;&#x9700;&#x6C42;&#xFF0C;&#x6B64;&#x65F6;&#x53EF;&#x4EE5;&#x91C7;&#x7528;StorageClass&#x8D44;&#x6E90;&#x3002;&#x8FD9;&#x4E2A;&#x5728;&#x524D;&#x9762;&#x5C31;&#x5DF2;&#x7ECF;&#x63D0;&#x5230;&#x8FC7;&#x6B64;&#x65B9;&#x6848;&#x3002;</p>
+<p>PV&#x662F;&#x96C6;&#x7FA4;&#x4E2D;&#x7684;&#x8D44;&#x6E90;&#x3002; PVC&#x662F;&#x5BF9;&#x8FD9;&#x4E9B;&#x8D44;&#x6E90;&#x7684;&#x8BF7;&#x6C42;&#xFF0C;&#x4E5F;&#x662F;&#x5BF9;&#x8D44;&#x6E90;&#x7684;&#x7D22;&#x8D54;&#x68C0;&#x67E5;&#x3002; PV&#x548C;PVC&#x4E4B;&#x95F4;&#x7684;&#x76F8;&#x4E92;&#x4F5C;&#x7528;&#x9075;&#x5FAA;&#x8FD9;&#x4E2A;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF1A;</p>
+</blockquote>
+<pre><code class="lang-code">Provisioning&#xFF08;&#x914D;&#x7F6E;&#xFF09;---&gt; Binding&#xFF08;&#x7ED1;&#x5B9A;&#xFF09;---&gt;Using&#xFF08;&#x4F7F;&#x7528;&#xFF09;---&gt; Releasing&#xFF08;&#x91CA;&#x653E;&#xFF09; ---&gt; Recycling&#xFF08;&#x56DE;&#x6536;&#xFF09;
+</code></pre>
+<p><strong>Provisioning</strong></p>
+<blockquote>
+<p>&#x8FD9;&#x91CC;&#x6709;&#x4E24;&#x79CD;PV&#x7684;&#x63D0;&#x4F9B;&#x65B9;&#x5F0F;:&#x9759;&#x6001;&#x6216;&#x8005;&#x52A8;&#x6001;
+&#x9759;&#x6001;--&gt;&#x76F4;&#x63A5;&#x56FA;&#x5B9A;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#xFF1A;
+&#x96C6;&#x7FA4;&#x7BA1;&#x7406;&#x5458;&#x521B;&#x5EFA;&#x4E00;&#x4E9B; PV&#x3002;&#x5B83;&#x4EEC;&#x643A;&#x5E26;&#x53EF;&#x4F9B;&#x96C6;&#x7FA4;&#x7528;&#x6237;&#x4F7F;&#x7528;&#x7684;&#x771F;&#x5B9E;&#x5B58;&#x50A8;&#x7684;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;&#x3002; &#x5B83;&#x4EEC;&#x5B58;&#x5728;&#x4E8E;Kubernetes API&#x4E2D;&#xFF0C;&#x53EF;&#x7528;&#x4E8E;&#x6D88;&#x8D39;&#x3002;</p>
+<p>&#x52A8;&#x6001;--&gt;&#x901A;&#x8FC7;&#x5B58;&#x50A8;&#x7C7B;&#x8FDB;&#x884C;&#x52A8;&#x6001;&#x521B;&#x5EFA;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#xFF1A;
+&#x5F53;&#x7BA1;&#x7406;&#x5458;&#x521B;&#x5EFA;&#x7684;&#x9759;&#x6001; PV &#x90FD;&#x4E0D;&#x5339;&#x914D;&#x7528;&#x6237;&#x7684; PVC &#x65F6;&#xFF0C;&#x96C6;&#x7FA4;&#x53EF;&#x80FD;&#x4F1A;&#x5C1D;&#x8BD5;&#x52A8;&#x6001;&#x5730;&#x4E3A; PVC &#x914D;&#x7F6E;&#x5377;&#x3002;&#x6B64;&#x914D;&#x7F6E;&#x57FA;&#x4E8E; StorageClasses&#xFF1A;PVC &#x5FC5;&#x987B;&#x8BF7;&#x6C42;&#x5B58;&#x50A8;&#x7C7B;&#xFF0C;&#x5E76;&#x4E14;&#x7BA1;&#x7406;&#x5458;&#x5FC5;&#x987B;&#x5DF2;&#x521B;&#x5EFA;&#x5E76;&#x914D;&#x7F6E;&#x8BE5;&#x7C7B;&#x624D;&#x80FD;&#x8FDB;&#x884C;&#x52A8;&#x6001;&#x914D;&#x7F6E;&#x3002; &#x8981;&#x6C42;&#x8BE5;&#x7C7B;&#x7684;&#x58F0;&#x660E;&#x6709;&#x6548;&#x5730;&#x4E3A;&#x81EA;&#x5DF1;&#x7981;&#x7528;&#x52A8;&#x6001;&#x914D;&#x7F6E;&#x3002;</p>
+</blockquote>
+<p><strong>Binding</strong></p>
+<blockquote>
+<p>&#x5728;&#x52A8;&#x6001;&#x914D;&#x7F6E;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x7528;&#x6237;&#x521B;&#x5EFA;&#x6216;&#x5DF2;&#x7ECF;&#x521B;&#x5EFA;&#x4E86;&#x5177;&#x6709;&#x7279;&#x5B9A;&#x6570;&#x91CF;&#x7684;&#x5B58;&#x50A8;&#x8BF7;&#x6C42;&#x548C;&#x7279;&#x5B9A;&#x8BBF;&#x95EE;&#x6A21;&#x5F0F;&#x7684;PersistentVolumeClaim&#x3002; &#x4E3B;&#x673A;&#x4E2D;&#x7684;&#x63A7;&#x5236;&#x56DE;&#x8DEF;&#x76D1;&#x89C6;&#x65B0;&#x7684;PVC&#xFF0C;&#x627E;&#x5230;&#x5339;&#x914D;&#x7684;PV&#xFF08;&#x5982;&#x679C;&#x53EF;&#x80FD;&#xFF09;&#xFF0C;&#x5E76;&#x5C06; PVC &#x548C; PV &#x7ED1;&#x5B9A;&#x5728;&#x4E00;&#x8D77;&#x3002; &#x5982;&#x679C;&#x4E3A;&#x65B0;&#x7684;PVC&#x52A8;&#x6001;&#x914D;&#x7F6E;PV&#xFF0C;&#x5219;&#x5FAA;&#x73AF;&#x5C06;&#x59CB;&#x7EC8;&#x5C06;&#x8BE5;PV&#x7ED1;&#x5B9A;&#x5230;PVC&#x3002; &#x5426;&#x5219;&#xFF0C;&#x7528;&#x6237;&#x603B;&#x662F;&#x81F3;&#x5C11;&#x5F97;&#x5230;&#x4ED6;&#x4EEC;&#x8981;&#x6C42;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x4F46;&#x662F;&#x5377;&#x53EF;&#x80FD;&#x8D85;&#x51FA;&#x4E86;&#x8981;&#x6C42;&#x3002; &#x4E00;&#x65E6;&#x7ED1;&#x5B9A;&#xFF0C;PersistentVolumeClaim&#x7ED1;&#x5B9A;&#x662F;&#x6392;&#x4ED6;&#x7684;&#xFF0C;&#x4E0D;&#x7BA1;&#x7528;&#x4E8E;&#x7ED1;&#x5B9A;&#x5B83;&#x4EEC;&#x7684;&#x6A21;&#x5F0F;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x5339;&#x914D;&#x7684;&#x5377;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;PVC&#x5C06;&#x4FDD;&#x6301;&#x65E0;&#x9650;&#x671F;&#x3002; &#x968F;&#x7740;&#x5339;&#x914D;&#x5377;&#x53D8;&#x5F97;&#x53EF;&#x7528;&#xFF0C;PVC&#x5C06;&#x88AB;&#x7ED1;&#x5B9A;&#x3002; &#x4F8B;&#x5982;&#xFF0C;&#x63D0;&#x4F9B;&#x8BB8;&#x591A;50Gi PV&#x7684;&#x96C6;&#x7FA4;&#x5C06;&#x4E0D;&#x5339;&#x914D;&#x8981;&#x6C42;100Gi&#x7684;PVC&#x3002; &#x5F53;&#x96C6;&#x7FA4;&#x4E2D;&#x6DFB;&#x52A0;100Gi PV&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x7ED1;&#x5B9A;PVC&#x3002;</p>
+</blockquote>
+<p><strong>Using</strong></p>
+<blockquote>
+<p>Pod&#x4F7F;&#x7528;PVC&#x4F5C;&#x4E3A;&#x5377;&#x3002; &#x96C6;&#x7FA4;&#x68C0;&#x67E5;&#x58F0;&#x660E;&#x4EE5;&#x627E;&#x5230;&#x7ED1;&#x5B9A;&#x7684;&#x5377;&#x5E76;&#x6302;&#x8F7D;&#x8BE5;&#x5377;&#x7684;&#x5377;&#x3002; &#x5BF9;&#x4E8E;&#x652F;&#x6301;&#x591A;&#x79CD;&#x8BBF;&#x95EE;&#x6A21;&#x5F0F;&#x7684;&#x5377;&#xFF0C;&#x7528;&#x6237;&#x5728;&#x5C06;&#x5176;&#x58F0;&#x660E;&#x7528;&#x4F5C;pod&#x4E2D;&#x7684;&#x5377;&#x65F6;&#x6307;&#x5B9A;&#x6240;&#x9700;&#x7684;&#x6A21;&#x5F0F;&#x3002;</p>
+<p>&#x4E00;&#x65E6;&#x7528;&#x6237;&#x6709;&#x58F0;&#x660E;&#x5E76;&#x4E14;&#x8BE5;&#x58F0;&#x660E;&#x88AB;&#x7ED1;&#x5B9A;&#xFF0C;&#x7ED1;&#x5B9A;&#x7684;PV&#x5C5E;&#x4E8E;&#x7528;&#x6237;&#xFF0C;&#x53EA;&#x8981;&#x4ED6;&#x4EEC;&#x9700;&#x8981;&#x5B83;&#x3002; &#x7528;&#x6237;&#x901A;&#x8FC7;&#x5728;&#x5176;Pod&#x7684;&#x5377;&#x5757;&#x4E2D;&#x5305;&#x542B;PersistentVolumeClaim&#x6765;&#x5B89;&#x6392;Pods&#x5E76;&#x8BBF;&#x95EE;&#x5176;&#x58F0;&#x660E;&#x7684;PV&#x3002;</p>
+</blockquote>
+<p><strong>Releasing</strong></p>
+<blockquote>
+<p>&#x5F53;&#x7528;&#x6237;&#x5B8C;&#x6210;&#x5377;&#x65F6;&#xFF0C;&#x4ED6;&#x4EEC;&#x53EF;&#x4EE5;&#x4ECE;&#x5141;&#x8BB8;&#x8D44;&#x6E90;&#x56DE;&#x6536;&#x7684;API&#x4E2D;&#x5220;&#x9664;PVC&#x5BF9;&#x8C61;&#x3002; &#x5F53;&#x58F0;&#x660E;&#x88AB;&#x5220;&#x9664;&#x65F6;&#xFF0C;&#x5377;&#x88AB;&#x8BA4;&#x4E3A;&#x662F;&#x201C;&#x91CA;&#x653E;&#x7684;&#x201D;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x8FD8;&#x4E0D;&#x80FD;&#x7528;&#x4E8E;&#x53E6;&#x4E00;&#x4E2A;&#x58F0;&#x660E;&#x3002; &#x4EE5;&#x524D;&#x7684;&#x7D22;&#x8D54;&#x4EBA;&#x7684;&#x6570;&#x636E;&#x4ECD;&#x7136;&#x4FDD;&#x7559;&#x5728;&#x5FC5;&#x987B;&#x6839;&#x636E;&#x653F;&#x7B56;&#x5904;&#x7406;&#x7684;&#x5377;&#x4E0A;.</p>
+</blockquote>
+<p><strong>Reclaiming</strong></p>
+<blockquote>
+<p>PersistentVolume&#x7684;&#x56DE;&#x6536;&#x7B56;&#x7565;&#x544A;&#x8BC9;&#x96C6;&#x7FA4;&#x5728;&#x91CA;&#x653E;&#x5176;&#x58F0;&#x660E;&#x540E;&#xFF0C;&#x8BE5;&#x5377;&#x5E94;&#x8BE5;&#x5982;&#x4F55;&#x5904;&#x7406;&#x3002; &#x76EE;&#x524D;&#xFF0C;&#x5377;&#x53EF;&#x4EE5;&#x662F;&#x4FDD;&#x7559;&#xFF0C;&#x56DE;&#x6536;&#x6216;&#x5220;&#x9664;&#x3002; &#x4FDD;&#x7559;&#x53EF;&#x4EE5;&#x624B;&#x52A8;&#x56DE;&#x6536;&#x8D44;&#x6E90;&#x3002; &#x5BF9;&#x4E8E;&#x90A3;&#x4E9B;&#x652F;&#x6301;&#x5B83;&#x7684;&#x5377;&#x63D2;&#x4EF6;&#xFF0C;&#x5220;&#x9664;&#x5C06;&#x4ECE;Kubernetes&#x4E2D;&#x5220;&#x9664;PersistentVolume&#x5BF9;&#x8C61;&#xFF0C;&#x4EE5;&#x53CA;&#x5220;&#x9664;&#x5916;&#x90E8;&#x57FA;&#x7840;&#x67B6;&#x6784;&#xFF08;&#x5982;AWS EBS&#xFF0C;GCE PD&#xFF0C;Azure Disk&#x6216;Cinder&#x5377;&#xFF09;&#x4E2D;&#x5173;&#x8054;&#x7684;&#x5B58;&#x50A8;&#x8D44;&#x4EA7;&#x3002; &#x52A8;&#x6001;&#x914D;&#x7F6E;&#x7684;&#x5377;&#x59CB;&#x7EC8;&#x88AB;&#x5220;&#x9664;</p>
+</blockquote>
+<p><strong>Recycling</strong></p>
+<blockquote>
+<p>&#x5982;&#x679C;&#x53D7;&#x9002;&#x5F53;&#x7684;&#x5377;&#x63D2;&#x4EF6;&#x652F;&#x6301;&#xFF0C;&#x56DE;&#x6536;&#x5C06;&#x5BF9;&#x5377;&#x6267;&#x884C;&#x57FA;&#x672C;&#x7684;&#x64E6;&#x9664;&#xFF08;rm -rf / thevolume / *&#xFF09;&#xFF0C;&#x5E76;&#x4F7F;&#x5176;&#x518D;&#x6B21;&#x53EF;&#x7528;&#x4E8E;&#x65B0;&#x7684;&#x58F0;&#x660E;&#x3002;</p>
+</blockquote>
+<h2 id="&#x516D;&#x3001;nfs&#x4F7F;&#x7528;pv&#x548C;pvc">&#x516D;&#x3001;NFS&#x4F7F;&#x7528;PV&#x548C;PVC</h2>
+<blockquote>
+<p>&#x5B9E;&#x9A8C;&#x56FE;&#x5982;&#x4E0B;&#xFF1A;
+<img src="static/1349539-20181010110937451-1076717702.png" alt="NFS&#x4F7F;&#x7528;PV&#x548C;PVC&#x5B9E;&#x9A8C;&#x56FE;&#x5982;&#x4E0B;"></p>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master ~]# kubectl explain pv    #&#x67E5;&#x770B;pv&#x7684;&#x5B9A;&#x4E49;&#x65B9;&#x5F0F;
+FIELDS:
+    apiVersion
+    kind
+    metadata
+    spec
+[root@k8s-master ~]# kubectl explain pv.spec    #&#x67E5;&#x770B;pv&#x5B9A;&#x4E49;&#x7684;&#x89C4;&#x683C;
+spec:
+  nfs&#xFF08;&#x5B9A;&#x4E49;&#x5B58;&#x50A8;&#x7C7B;&#x578B;&#xFF09;
+    path&#xFF08;&#x5B9A;&#x4E49;&#x6302;&#x8F7D;&#x5377;&#x8DEF;&#x5F84;&#xFF09;
+    server&#xFF08;&#x5B9A;&#x4E49;&#x670D;&#x52A1;&#x5668;&#x540D;&#x79F0;&#xFF09;
+  accessModes&#xFF08;&#x5B9A;&#x4E49;&#x8BBF;&#x95EE;&#x6A21;&#x578B;&#xFF0C;&#x6709;&#x4EE5;&#x4E0B;&#x4E09;&#x79CD;&#x8BBF;&#x95EE;&#x6A21;&#x578B;&#xFF0C;&#x4EE5;&#x5217;&#x8868;&#x7684;&#x65B9;&#x5F0F;&#x5B58;&#x5728;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x591A;&#x4E2A;&#x8BBF;&#x95EE;&#x6A21;&#x5F0F;&#xFF09;
+    ReadWriteOnce&#xFF08;RWO&#xFF09;  &#x5355;&#x8282;&#x70B9;&#x8BFB;&#x5199;
+    ReadOnlyMany&#xFF08;ROX&#xFF09;  &#x591A;&#x8282;&#x70B9;&#x53EA;&#x8BFB;
+    ReadWriteMany&#xFF08;RWX&#xFF09;  &#x591A;&#x8282;&#x70B9;&#x8BFB;&#x5199;
+  capacity&#xFF08;&#x5B9A;&#x4E49;PV&#x7A7A;&#x95F4;&#x7684;&#x5927;&#x5C0F;&#xFF09;
+    storage&#xFF08;&#x6307;&#x5B9A;&#x5927;&#x5C0F;&#xFF09;
+
+[root@k8s-master volumes]# kubectl explain pvc   #&#x67E5;&#x770B;PVC&#x7684;&#x5B9A;&#x4E49;&#x65B9;&#x5F0F;
+KIND:     PersistentVolumeClaim
+VERSION:  v1
+FIELDS:
+   apiVersion   &lt;string&gt;
+   kind &lt;string&gt;  
+   metadata &lt;Object&gt;
+   spec &lt;Object&gt;
+[root@k8s-master volumes]# kubectl explain pvc.spec
+spec:
+  accessModes&#xFF08;&#x5B9A;&#x4E49;&#x8BBF;&#x95EE;&#x6A21;&#x5F0F;&#xFF0C;&#x5FC5;&#x987B;&#x662F;PV&#x7684;&#x8BBF;&#x95EE;&#x6A21;&#x5F0F;&#x7684;&#x5B50;&#x96C6;&#xFF09;
+  resources&#xFF08;&#x5B9A;&#x4E49;&#x7533;&#x8BF7;&#x8D44;&#x6E90;&#x7684;&#x5927;&#x5C0F;&#xFF09;
+    requests:
+      storage:
+</code></pre>
+<p><strong>1&#x3001;&#x914D;&#x7F6E;nfs&#x5B58;&#x50A8;</strong></p>
+<pre><code class="lang-code">[root@stor01 volumes]# mkdir v{1,2,3,4,5}
+[root@stor01 volumes]# vim /etc/exports
+/data/volumes/v1 192.168.56.0/24(rw,no_root_squash)
+/data/volumes/v2 192.168.56.0/24(rw,no_root_squash)
+/data/volumes/v3 192.168.56.0/24(rw,no_root_squash)
+/data/volumes/v4 192.168.56.0/24(rw,no_root_squash)
+/data/volumes/v5 192.168.56.0/24(rw,no_root_squash)
+[root@stor01 volumes]# exportfs -arv
+exporting 192.168.56.0/24:/data/volumes/v5
+exporting 192.168.56.0/24:/data/volumes/v4
+exporting 192.168.56.0/24:/data/volumes/v3
+exporting 192.168.56.0/24:/data/volumes/v2
+exporting 192.168.56.0/24:/data/volumes/v1
+[root@stor01 volumes]# showmount -e
+Export list for stor01:
+/data/volumes/v5 192.168.56.0/24
+/data/volumes/v4 192.168.56.0/24
+/data/volumes/v3 192.168.56.0/24
+/data/volumes/v2 192.168.56.0/24
+/data/volumes/v1 192.168.56.0/24
+</code></pre>
+<p><strong>2&#x3001;&#x5B9A;&#x4E49;PV</strong></p>
+<blockquote>
+<p>&#x8FD9;&#x91CC;&#x5B9A;&#x4E49;5&#x4E2A;PV&#xFF0C;&#x5E76;&#x4E14;&#x5B9A;&#x4E49;&#x6302;&#x8F7D;&#x7684;&#x8DEF;&#x5F84;&#x4EE5;&#x53CA;&#x8BBF;&#x95EE;&#x6A21;&#x5F0F;&#xFF0C;&#x8FD8;&#x6709;PV&#x5212;&#x5206;&#x7684;&#x5927;&#x5C0F;&#x3002;</p>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master volumes]# kubectl explain pv
+[root@k8s-master volumes]# kubectl explain pv.spec.nfs
+[root@k8s-master volumes]# vim pv-demo.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv001
+  labels:
+    name: pv001
+spec:
+  nfs:
+    path: /data/volumes/v1
+    server: stor01
+  accessModes: [&quot;ReadWriteMany&quot;,&quot;ReadWriteOnce&quot;]
+  capacity:
+    storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv002
+  labels:
+    name: pv002
+spec:
+  nfs:
+    path: /data/volumes/v2
+    server: stor01
+  accessModes: [&quot;ReadWriteOnce&quot;]
+  capacity:
+    storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv003
+  labels:
+    name: pv003
+spec:
+  nfs:
+    path: /data/volumes/v3
+    server: stor01
+  accessModes: [&quot;ReadWriteMany&quot;,&quot;ReadWriteOnce&quot;]
+  capacity:
+    storage: 2Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv004
+  labels:
+    name: pv004
+spec:
+  nfs:
+    path: /data/volumes/v4
+    server: stor01
+  accessModes: [&quot;ReadWriteMany&quot;,&quot;ReadWriteOnce&quot;]
+  capacity:
+    storage: 4Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv005
+  labels:
+    name: pv005
+spec:
+  nfs:
+    path: /data/volumes/v5
+    server: stor01
+  accessModes: [&quot;ReadWriteMany&quot;,&quot;ReadWriteOnce&quot;]
+  capacity:
+    storage: 5Gi
+[root@k8s-master volumes]# kubectl apply -f pv-demo.yaml
+persistentvolume/pv001 created
+persistentvolume/pv002 created
+persistentvolume/pv003 created
+persistentvolume/pv004 created
+persistentvolume/pv005 created
+[root@k8s-master volumes]# kubectl get pv
+NAME      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM     STORAGECLASS   REASON    AGE
+pv001     1Gi        RWO,RWX        Retain           Available                                      7s
+pv002     2Gi        RWO            Retain           Available                                      7s
+pv003     2Gi        RWO,RWX        Retain           Available                                      7s
+pv004     4Gi        RWO,RWX        Retain           Available                                      7s
+pv005     5Gi        RWO,RWX        Retain           Available                                      7s
+</code></pre>
+<p><strong>3&#x3001;&#x5B9A;&#x4E49;PVC</strong></p>
+<blockquote>
+<p>&#x8FD9;&#x91CC;&#x5B9A;&#x4E49;&#x4E86;pvc&#x7684;&#x8BBF;&#x95EE;&#x6A21;&#x5F0F;&#x4E3A;&#x591A;&#x8DEF;&#x8BFB;&#x5199;&#xFF0C;&#x8BE5;&#x8BBF;&#x95EE;&#x6A21;&#x5F0F;&#x5FC5;&#x987B;&#x5728;&#x524D;&#x9762;pv&#x5B9A;&#x4E49;&#x7684;&#x8BBF;&#x95EE;&#x6A21;&#x5F0F;&#x4E4B;&#x4E2D;&#x3002;&#x5B9A;&#x4E49;PVC&#x7533;&#x8BF7;&#x7684;&#x5927;&#x5C0F;&#x4E3A;2Gi&#xFF0C;&#x6B64;&#x65F6;PVC&#x4F1A;&#x81EA;&#x52A8;&#x53BB;&#x5339;&#x914D;&#x591A;&#x8DEF;&#x8BFB;&#x5199;&#x4E14;&#x5927;&#x5C0F;&#x4E3A;2Gi&#x7684;PV&#xFF0C;&#x5339;&#x914D;&#x6210;&#x529F;&#x83B7;&#x53D6;PVC&#x7684;&#x72B6;&#x6001;&#x5373;&#x4E3A;Bound</p>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master volumes ~]# vim pod-vol-pvc.yaml
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mypvc
+  namespace: default
+spec:
+  accessModes: [&quot;ReadWriteMany&quot;]
+  resources:
+    requests:
+      storage: 2Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-vol-pvc
+  namespace: default
+spec:
+  containers:
+  - name: myapp
+    image: ikubernetes/myapp:v1
+    volumeMounts:
+    - name: html
+      mountPath: /usr/share/nginx/html
+  volumes:
+    - name: html
+      persistentVolumeClaim:
+        claimName: mypvc
+[root@k8s-master volumes]# kubectl apply -f pod-vol-pvc.yaml
+persistentvolumeclaim/mypvc created
+pod/pod-vol-pvc created
+[root@k8s-master volumes]# kubectl get pv
+NAME      CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM           STORAGECLASS   REASON    AGE
+pv001     1Gi        RWO,RWX        Retain           Available                                            19m
+pv002     2Gi        RWO            Retain           Available                                            19m
+pv003     2Gi        RWO,RWX        Retain           Bound       default/mypvc                            19m
+pv004     4Gi        RWO,RWX        Retain           Available                                            19m
+pv005     5Gi        RWO,RWX        Retain           Available                                            19m
+[root@k8s-master volumes]# kubectl get pvc
+NAME      STATUS    VOLUME    CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+mypvc     Bound     pv003     2Gi        RWO,RWX                       22s
+</code></pre>
+<p>4&#x3001;&#x6D4B;&#x8BD5;&#x8BBF;&#x95EE;</p>
+<blockquote>
+<p>&#x5728;&#x5B58;&#x50A8;&#x670D;&#x52A1;&#x5668;&#x4E0A;&#x521B;&#x5EFA;index.html&#xFF0C;&#x5E76;&#x5199;&#x5165;&#x6570;&#x636E;&#xFF0C;&#x901A;&#x8FC7;&#x8BBF;&#x95EE;Pod&#x8FDB;&#x884C;&#x67E5;&#x770B;&#xFF0C;&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x5230;&#x76F8;&#x5E94;&#x7684;&#x9875;&#x9762;&#x3002;</p>
+</blockquote>
+<pre><code class="lang-code">[root@stor01 volumes]# cd v3/
+[root@stor01 v3]# echo &quot;welcome to use pv3&quot; &gt; index.html
+[root@k8s-master volumes]# kubectl get pods -o wide
+pod-vol-pvc             1/1       Running   0          3m        10.244.2.39   k8s-node02
+[root@k8s-master volumes]# curl  10.244.2.39
+welcome to use pv3
+</code></pre>
+<h2 id="&#x4E03;&#x3001;storageclass">&#x4E03;&#x3001;StorageClass</h2>
+<blockquote>
+<p>&#x5728;pv&#x548C;pvc&#x4F7F;&#x7528;&#x8FC7;&#x7A0B;&#x4E2D;&#x5B58;&#x5728;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x5728;pvc&#x7533;&#x8BF7;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x65F6;&#xFF0C;&#x672A;&#x5FC5;&#x5C31;&#x6709;&#x73B0;&#x6210;&#x7684;pv&#x7B26;&#x5408;pvc&#x7533;&#x8BF7;&#x7684;&#x9700;&#x6C42;&#xFF0C;&#x4E0A;&#x9762;nfs&#x5728;&#x505A;pvc&#x53EF;&#x4EE5;&#x6210;&#x529F;&#x7684;&#x56E0;&#x7D20;&#x662F;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x505A;&#x4E86;&#x6307;&#x5B9A;&#x7684;&#x9700;&#x6C42;&#x5904;&#x7406;&#x3002;&#x90A3;&#x4E48;&#x5F53;PVC&#x7533;&#x8BF7;&#x7684;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x4E0D;&#x4E00;&#x5B9A;&#x6709;&#x6EE1;&#x8DB3;PVC&#x8981;&#x6C42;&#x7684;PV&#x4E8B;&#xFF0C;&#x53C8;&#x8BE5;&#x5982;&#x4F55;&#x5904;&#x7406;&#x5462;&#xFF1F;&#xFF1F;&#xFF1F;&#x4E3A;&#x6B64;&#xFF0C;Kubernetes&#x4E3A;&#x7BA1;&#x7406;&#x5458;&#x63D0;&#x4F9B;&#x4E86;&#x63CF;&#x8FF0;&#x5B58;&#x50A8;&quot;class&#xFF08;&#x7C7B;&#xFF09;&quot;&#x7684;&#x65B9;&#x6CD5;&#xFF08;StorageClass&#xFF09;&#x3002;&#x4E3E;&#x4E2A;&#x4F8B;&#x5B50;&#xFF0C;&#x5728;&#x5B58;&#x50A8;&#x7CFB;&#x7EDF;&#x4E2D;&#x5212;&#x5206;&#x4E00;&#x4E2A;1TB&#x7684;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x63D0;&#x4F9B;&#x7ED9;Kubernetes&#x4F7F;&#x7528;&#xFF0C;&#x5F53;&#x7528;&#x6237;&#x9700;&#x8981;&#x4E00;&#x4E2A;10G&#x7684;PVC&#x65F6;&#xFF0C;&#x4F1A;&#x7ACB;&#x5373;&#x901A;&#x8FC7;restful&#x53D1;&#x9001;&#x8BF7;&#x6C42;&#xFF0C;&#x4ECE;&#x800C;&#x8BA9;&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;10G&#x7684;image&#xFF0C;&#x4E4B;&#x540E;&#x5728;&#x6211;&#x4EEC;&#x7684;&#x96C6;&#x7FA4;&#x4E2D;&#x5B9A;&#x4E49;&#x6210;10G&#x7684;PV&#x4F9B;&#x7ED9;&#x7ED9;&#x5F53;&#x524D;&#x7684;PVC&#x4F5C;&#x4E3A;&#x6302;&#x8F7D;&#x4F7F;&#x7528;&#x3002;&#x5728;&#x6B64;&#x4E4B;&#x524D;&#x6211;&#x4EEC;&#x7684;&#x5B58;&#x50A8;&#x7CFB;&#x7EDF;&#x5FC5;&#x987B;&#x652F;&#x6301;restful&#x63A5;&#x53E3;&#xFF0C;&#x6BD4;&#x5982;ceph&#x5206;&#x5E03;&#x5F0F;&#x5B58;&#x50A8;&#xFF0C;&#x800C;glusterfs&#x5219;&#x9700;&#x8981;&#x501F;&#x52A9;&#x7B2C;&#x4E09;&#x65B9;&#x63A5;&#x53E3;&#x5B8C;&#x6210;&#x8FD9;&#x6837;&#x7684;&#x8BF7;&#x6C42;&#x3002;&#x5982;&#x56FE;&#xFF1A;
+<img src="static/1349539-20181010160310479-848300996.png" alt="StorageClass"></p>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master ~]# kubectl explain storageclass  #storageclass&#x4E5F;&#x662F;k8s&#x4E0A;&#x7684;&#x8D44;&#x6E90;
+KIND:     StorageClass
+VERSION:  storage.k8s.io/v1
+FIELDS:
+   allowVolumeExpansion &lt;boolean&gt;
+   allowedTopologies    &lt;[]Object&gt;
+   apiVersion   &lt;string&gt;
+   kind &lt;string&gt;
+   metadata &lt;Object&gt;
+   mountOptions &lt;[]string&gt;    #&#x6302;&#x8F7D;&#x9009;&#x9879;
+   parameters   &lt;map[string]string&gt;  #&#x53C2;&#x6570;&#xFF0C;&#x53D6;&#x51B3;&#x4E8E;&#x5206;&#x914D;&#x5668;&#xFF0C;&#x53EF;&#x4EE5;&#x63A5;&#x53D7;&#x4E0D;&#x540C;&#x7684;&#x53C2;&#x6570;&#x3002; &#x4F8B;&#x5982;&#xFF0C;&#x53C2;&#x6570; type &#x7684;&#x503C; io1 &#x548C;&#x53C2;&#x6570; iopsPerGB &#x7279;&#x5B9A;&#x4E8E; EBS PV&#x3002;&#x5F53;&#x53C2;&#x6570;&#x88AB;&#x7701;&#x7565;&#x65F6;&#xFF0C;&#x4F1A;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x503C;&#x3002;  
+   provisioner  &lt;string&gt; -required-  #&#x5B58;&#x50A8;&#x5206;&#x914D;&#x5668;&#xFF0C;&#x7528;&#x6765;&#x51B3;&#x5B9A;&#x4F7F;&#x7528;&#x54EA;&#x4E2A;&#x5377;&#x63D2;&#x4EF6;&#x5206;&#x914D; PV&#x3002;&#x8BE5;&#x5B57;&#x6BB5;&#x5FC5;&#x987B;&#x6307;&#x5B9A;&#x3002;
+   reclaimPolicy    &lt;string&gt;   #&#x56DE;&#x6536;&#x7B56;&#x7565;&#xFF0C;&#x53EF;&#x4EE5;&#x662F; Delete &#x6216;&#x8005; Retain&#x3002;&#x5982;&#x679C; StorageClass &#x5BF9;&#x8C61;&#x88AB;&#x521B;&#x5EFA;&#x65F6;&#x6CA1;&#x6709;&#x6307;&#x5B9A; reclaimPolicy &#xFF0C;&#x5B83;&#x5C06;&#x9ED8;&#x8BA4;&#x4E3A; Delete&#x3002;
+   volumeBindingMode    &lt;string&gt;  #&#x5377;&#x7684;&#x7ED1;&#x5B9A;&#x6A21;&#x5F0F;
+</code></pre>
+<blockquote>
+<p>StorageClass &#x4E2D;&#x5305;&#x542B; provisioner&#x3001;parameters &#x548C; reclaimPolicy &#x5B57;&#x6BB5;&#xFF0C;&#x5F53; class &#x9700;&#x8981;&#x52A8;&#x6001;&#x5206;&#x914D; PersistentVolume &#x65F6;&#x4F1A;&#x4F7F;&#x7528;&#x5230;&#x3002;&#x7531;&#x4E8E;StorageClass&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x5B58;&#x50A8;&#x7CFB;&#x7EDF;&#xFF0C;&#x6B64;&#x5904;&#x5C31;&#x4E0D;&#x518D;&#x6F14;&#x793A;&#x3002;&#x4ECE;&#x5176;&#x4ED6;&#x8D44;&#x6599;&#x67E5;&#x770B;&#x5B9A;&#x4E49;StorageClass&#x7684;&#x65B9;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;</p>
+</blockquote>
+<pre><code class="lang-code">kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: standard
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+reclaimPolicy: Retain
+mountOptions:
+  - debug
+</code></pre>
+<h2 id="&#x516B;&#x3001;&#x914D;&#x7F6E;&#x5BB9;&#x5668;&#x5E94;&#x7528;&#xFF1A;secret&#x548C;configmap">&#x516B;&#x3001;&#x914D;&#x7F6E;&#x5BB9;&#x5668;&#x5E94;&#x7528;&#xFF1A;Secret&#x548C;configMap</h2>
+<blockquote>
+<p>&#x5728;&#x65E5;&#x5E38;&#x5355;&#x673A;&#x751A;&#x81F3;&#x96C6;&#x7FA4;&#x72B6;&#x6001;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5BF9;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x8FDB;&#x884C;&#x914D;&#x7F6E;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x5176;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5373;&#x53EF;&#x3002;&#x90A3;&#x4E48;&#x5728;&#x5BB9;&#x5668;&#x4E2D;&#x53C8;&#x8BE5;&#x5982;&#x4F55;&#x63D0;&#x4F9B;&#x914D;&#x7F6E; &#x4FE1;&#x606F;&#x5462;&#xFF1F;&#xFF1F;&#xFF1F;&#x4F8B;&#x5982;&#xFF0C;&#x4E3A;Nginx&#x914D;&#x7F6E;&#x4E00;&#x4E2A;&#x6307;&#x5B9A;&#x7684;server_name&#x6216;worker&#x8FDB;&#x7A0B;&#x6570;&#xFF0C;&#x4E3A;Tomcat&#x7684;JVM&#x914D;&#x7F6E;&#x5176;&#x5806;&#x5185;&#x5B58;&#x5927;&#x5C0F;&#x3002;&#x4F20;&#x7EDF;&#x7684;&#x5B9E;&#x8DF5;&#x8FC7;&#x7A0B;&#x4E2D;&#x901A;&#x5E38;&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#x65B9;&#x5F0F;&#xFF1A;</p>
+</blockquote>
+<ul>
+<li>&#x542F;&#x52A8;&#x5BB9;&#x5668;&#x65F6;&#xFF0C;&#x901A;&#x8FC7;&#x547D;&#x4EE4;&#x4F20;&#x9012;&#x53C2;&#x6570;</li>
+<li>&#x5C06;&#x5B9A;&#x4E49;&#x597D;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x901A;&#x8FC7;&#x955C;&#x50CF;&#x6587;&#x4EF6;&#x8FDB;&#x884C;&#x5199;&#x5165;</li>
+<li>&#x901A;&#x8FC7;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x65B9;&#x5F0F;&#x4F20;&#x9012;&#x914D;&#x7F6E;&#x6570;&#x636E;</li>
+<li>&#x6302;&#x8F7D;Docker&#x5377;&#x4F20;&#x9001;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x800C;&#x5728;Kubernetes&#x7CFB;&#x7EDF;&#x4E4B;&#x4E2D;&#x4E5F;&#x5B58;&#x5728;&#x8FD9;&#x6837;&#x7684;&#x7EC4;&#x4EF6;&#xFF0C;&#x5C31;&#x662F;&#x7279;&#x6B8A;&#x7684;&#x5B58;&#x50A8;&#x5377;&#x7C7B;&#x578B;&#x3002;&#x5176;&#x5E76;&#x4E0D;&#x662F;&#x63D0;&#x4F9B;pod&#x5B58;&#x50A8;&#x7A7A;&#x95F4;&#xFF0C;&#x800C;&#x662F;&#x7ED9;&#x7BA1;&#x7406;&#x5458;&#x6216;&#x7528;&#x6237;&#x63D0;&#x4F9B;&#x4ECE;&#x96C6;&#x7FA4;&#x5916;&#x90E8;&#x5411;Pod&#x5185;&#x90E8;&#x7684;&#x5E94;&#x7528;&#x6CE8;&#x5165;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#x7684;&#x65B9;&#x5F0F;&#x3002;&#x8FD9;&#x4E24;&#x79CD;&#x7279;&#x6B8A;&#x7C7B;&#x578B;&#x7684;&#x5B58;&#x50A8;&#x5377;&#x5206;&#x522B;&#x662F;&#xFF1A;configMap&#x548C;secret</li>
+</ul>
+<blockquote>
+<ul>
+<li>Secret&#xFF1A;&#x7528;&#x4E8E;&#x5411;Pod&#x4F20;&#x9012;&#x654F;&#x611F;&#x4FE1;&#x606F;&#xFF0C;&#x6BD4;&#x5982;&#x5BC6;&#x7801;&#xFF0C;&#x79C1;&#x94A5;&#xFF0C;&#x8BC1;&#x4E66;&#x6587;&#x4EF6;&#x7B49;&#xFF0C;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#x5982;&#x679C;&#x5728;&#x5BB9;&#x5668;&#x4E2D;&#x5B9A;&#x4E49;&#x5BB9;&#x6613;&#x6CC4;&#x9732;&#xFF0C;Secret&#x8D44;&#x6E90;&#x53EF;&#x4EE5;&#x8BA9;&#x7528;&#x6237;&#x5C06;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#x5B58;&#x50A8;&#x5728;&#x6025;&#x7FA4;&#x4F17;&#xFF0C;&#x7136;&#x540E;&#x901A;&#x8FC7;Pod&#x8FDB;&#x884C;&#x6302;&#x8F7D;&#xFF0C;&#x5B9E;&#x73B0;&#x654F;&#x611F;&#x6570;&#x636E;&#x548C;&#x7CFB;&#x7EDF;&#x89E3;&#x8026;&#x7684;&#x6548;&#x679C;&#x3002;</li>
+<li>ConfigMap&#xFF1A;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x5411;Pod&#x6CE8;&#x5165;&#x975E;&#x654F;&#x611F;&#x6570;&#x636E;&#xFF0C;&#x4F7F;&#x7528;&#x65F6;&#xFF0C;&#x7528;&#x6237;&#x5C06;&#x6570;&#x636E;&#x76F4;&#x63A5;&#x5B58;&#x50A8;&#x5728;ConfigMap&#x5BF9;&#x8C61;&#x5F53;&#x4E2D;&#xFF0C;&#x7136;&#x540E;Pod&#x901A;&#x8FC7;&#x4F7F;&#x7528;ConfigMap&#x5377;&#x8FDB;&#x884C;&#x5F15;&#x7528;&#xFF0C;&#x5B9E;&#x73B0;&#x5BB9;&#x5668;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x96C6;&#x4E2D;&#x5B9A;&#x4E49;&#x548C;&#x7BA1;&#x7406;&#x3002;</li>
+</ul>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master volumes]# kubectl explain pods.spec.volumes
+......
+   configMap    &lt;Object&gt;
+     ConfigMap represents a configMap that should populate this volume
+
+   secret   &lt;Object&gt;
+     Secret represents a secret that should populate this volume. More info:
+     https://kubernetes.io/docs/concepts/storage/volumes#secret
+</code></pre>
+<h3 id="81&#x3001;secret&#x89E3;&#x6790;">8.1&#x3001;Secret&#x89E3;&#x6790;</h3>
+<blockquote>
+<p>Secret&#x5BF9;&#x8C61;&#x5B58;&#x50A8;&#x6570;&#x636E;&#x7684;&#x65B9;&#x5F0F;&#x662F;&#x4EE5;&#x952E;&#x503C;&#x65B9;&#x5F0F;&#x5B58;&#x50A8;&#x6570;&#x636E;&#xFF0C;&#x5728;Pod&#x8D44;&#x6E90;&#x8FDB;&#x884C;&#x8C03;&#x7528;Secret&#x7684;&#x65B9;&#x5F0F;&#x662F;&#x901A;&#x8FC7;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x6216;&#x8005;&#x5B58;&#x50A8;&#x5377;&#x7684;&#x65B9;&#x5F0F;&#x8FDB;&#x884C;&#x8BBF;&#x95EE;&#x6570;&#x636E;&#xFF0C;&#x89E3;&#x51B3;&#x4E86;&#x5BC6;&#x7801;&#x3001;token&#x3001;&#x5BC6;&#x94A5;&#x7B49;&#x654F;&#x611F;&#x6570;&#x636E;&#x7684;&#x914D;&#x7F6E;&#x95EE;&#x9898;&#xFF0C;&#x800C;&#x4E0D;&#x9700;&#x8981;&#x628A;&#x8FD9;&#x4E9B;&#x654F;&#x611F;&#x6570;&#x636E;&#x66B4;&#x9732;&#x5230;&#x955C;&#x50CF;&#x6216;&#x8005;Pod Spec&#x4E2D;&#x3002;&#x53E6;&#x5916;&#xFF0C;Secret&#x5BF9;&#x8C61;&#x7684;&#x6570;&#x636E;&#x5B58;&#x50A8;&#x548C;&#x6253;&#x5370;&#x683C;&#x5F0F;&#x4E3A;Base64&#x7F16;&#x7801;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x56E0;&#x6B64;&#x7528;&#x6237;&#x5728;&#x521B;&#x5EFA;Secret&#x5BF9;&#x8C61;&#x65F6;&#xFF0C;&#x4E5F;&#x9700;&#x8981;&#x63D0;&#x4F9B;&#x8BE5;&#x7C7B;&#x578B;&#x7684;&#x7F16;&#x7801;&#x683C;&#x5F0F;&#x7684;&#x6570;&#x636E;&#x3002;&#x5728;&#x5BB9;&#x5668;&#x4E2D;&#x4EE5;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x6216;&#x5B58;&#x50A8;&#x5377;&#x7684;&#x65B9;&#x5F0F;&#x8BBF;&#x95EE;&#x65F6;&#xFF0C;&#x4F1A;&#x81EA;&#x52A8;&#x89E3;&#x7801;&#x4E3A;&#x660E;&#x6587;&#x683C;&#x5F0F;&#x3002;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x5728;Master&#x8282;&#x70B9;&#x4E0A;&#xFF0C;Secret&#x5BF9;&#x8C61;&#x4EE5;&#x975E;&#x52A0;&#x5BC6;&#x7684;&#x683C;&#x5F0F;&#x5B58;&#x50A8;&#x5728;etcd&#x4E2D;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x5BF9;etcd&#x7684;&#x7BA1;&#x7406;&#x548C;&#x6743;&#x9650;&#x8FDB;&#x884C;&#x4E25;&#x683C;&#x63A7;&#x5236;&#x3002;</p>
+<p>Secret&#x6709;4&#x79CD;&#x7C7B;&#x578B;&#xFF1A;</p>
+<ul>
+<li>Service Account &#xFF1A;&#x7528;&#x6765;&#x8BBF;&#x95EE;Kubernetes API&#xFF0C;&#x7531;Kubernetes&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#xFF0C;&#x5E76;&#x4E14;&#x4F1A;&#x81EA;&#x52A8;&#x6302;&#x8F7D;&#x5230;Pod&#x7684;/run/secrets/kubernetes.io/serviceaccount&#x76EE;&#x5F55;&#x4E2D;&#xFF1B;</li>
+<li>Opaque &#xFF1A;base64&#x7F16;&#x7801;&#x683C;&#x5F0F;&#x7684;Secret&#xFF0C;&#x7528;&#x6765;&#x5B58;&#x50A8;&#x5BC6;&#x7801;&#x3001;&#x5BC6;&#x94A5;&#x3001;&#x4FE1;&#x606F;&#x3001;&#x8BC1;&#x4E66;&#x7B49;&#xFF0C;&#x7C7B;&#x578B;&#x6807;&#x8BC6;&#x7B26;&#x4E3A;generic&#xFF1B;</li>
+<li>kubernetes.io/dockerconfigjson &#xFF1A;&#x7528;&#x6765;&#x5B58;&#x50A8;&#x79C1;&#x6709;docker registry&#x7684;&#x8BA4;&#x8BC1;&#x4FE1;&#x606F;&#xFF0C;&#x7C7B;&#x578B;&#x6807;&#x8BC6;&#x4E3A;docker-registry&#x3002;</li>
+<li>kubernetes.io/tls&#xFF1A;&#x7528;&#x4E8E;&#x4E3A;SSL&#x901A;&#x4FE1;&#x6A21;&#x5F0F;&#x5B58;&#x50A8;&#x8BC1;&#x4E66;&#x548C;&#x79C1;&#x94A5;&#x6587;&#x4EF6;&#xFF0C;&#x547D;&#x4EE4;&#x5F0F;&#x521B;&#x5EFA;&#x7C7B;&#x578B;&#x6807;&#x8BC6;&#x4E3A;tls&#x3002;</li>
+</ul>
+</blockquote>
+<p><strong>&#x521B;&#x5EFA; Secret&#x7684;2&#x79CD;&#x65B9;&#x5F0F;</strong>
+<strong>&#x547D;&#x4EE4;&#x5F0F;&#x521B;&#x5EFA;</strong></p>
+<blockquote>
+<ul>
+<li>1&#x3001;&#x901A;&#x8FC7; --from-literal&#xFF1A;</li>
+</ul>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master ~]# kubectl create secret -h
+Create a secret using specified subcommand.
+
+Available Commands:
+  docker-registry Create a secret for use with a Docker registry
+  generic         Create a secret from a local file, directory or literal value
+  tls             Create a TLS secret
+
+Usage:
+  kubectl create secret [flags] [options]
+
+Use &quot;kubectl &lt;command&gt; --help&quot; for more information about a given command.
+Use &quot;kubectl options&quot; for a list of global command-line options (applies to all commands).
+
+&#x6BCF;&#x4E2A; --from-literal &#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x4FE1;&#x606F;&#x6761;&#x76EE;&#x3002;
+[root@k8s-master ~]# kubectl create secret generic mysecret --from-literal=username=admin --from-literal=password=123456
+secret/mysecret created
+[root@k8s-master ~]# kubectl get secret
+NAME                    TYPE                                  DATA      AGE
+mysecret                Opaque                                2         6s
+</code></pre>
+<blockquote>
+<ul>
+<li>2&#x3001;&#x901A;&#x8FC7; --from-file&#xFF1A;&#x6BCF;&#x4E2A;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x4FE1;&#x606F;&#x6761;&#x76EE;&#x3002;</li>
+</ul>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master ~]# echo -n admin &gt; ./username
+[root@k8s-master ~]# echo -n 123456 &gt; ./password
+[root@k8s-master ~]# kubectl create secret generic mysecret --from-file=./username --from-file=./password
+secret/mysecret created
+[root@k8s-master ~]# kubectl get secret
+NAME                    TYPE                                  DATA      AGE
+mysecret                Opaque                                2         6s
+</code></pre>
+<blockquote>
+<ul>
+<li>3&#x3001;&#x901A;&#x8FC7; --from-env-file&#xFF1A; &#x6587;&#x4EF6; env.txt &#x4E2D;&#x6BCF;&#x884C; Key=Value &#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x4FE1;&#x606F;&#x6761;&#x76EE;&#x3002;</li>
+</ul>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master ~]# cat &lt;&lt; EOF &gt; env.txt
+&gt; username=admin
+&gt; password=123456
+&gt; EOF
+[root@k8s-master ~]# kubectl create secret generic mysecret --from-env-file=env.txt
+secret/mysecret created
+[root@k8s-master ~]# kubectl get secret
+NAME                    TYPE                                  DATA      AGE
+mysecret                Opaque                                2         10s
+</code></pre>
+<p><strong>&#x6E05;&#x5355;&#x5F0F;&#x521B;&#x5EFA;</strong></p>
+<blockquote>
+<ul>
+<li>&#x901A;&#x8FC7; YAML &#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF1A;</li>
+</ul>
+</blockquote>
+<pre><code class="lang-code">#&#x4E8B;&#x5148;&#x5B8C;&#x6210;&#x654F;&#x611F;&#x6570;&#x636E;&#x7684;Base64&#x7F16;&#x7801;
+[root@k8s-master ~]# echo -n admin |base64
+YWRtaW4=
+[root@k8s-master ~]# echo -n 123456 |base64
+MTIzNDU2
+
+[root@k8s-master ~]# vim secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecret
+data:
+  username: YWRtaW4=
+  password: MTIzNDU2
+[root@k8s-master ~]# kubectl apply -f secret.yaml
+secret/mysecret created
+[root@k8s-master ~]# kubectl get secret  #&#x67E5;&#x770B;&#x5B58;&#x5728;&#x7684; secret&#xFF0C;&#x663E;&#x793A;&#x6709;2&#x6761;&#x6570;&#x636E;
+NAME                    TYPE                                  DATA      AGE
+mysecret                Opaque                                2         8s
+[root@k8s-master ~]# kubectl describe secret mysecret  #&#x67E5;&#x770B;&#x6570;&#x636E;&#x7684; Key
+Name:         mysecret
+Namespace:    default
+Labels:       &lt;none&gt;
+Annotations:  
+Type:         Opaque
+
+Data
+====
+username:  5 bytes
+password:  6 bytes
+[root@k8s-master ~]# kubectl edit secret mysecret  #&#x67E5;&#x770B;&#x5177;&#x4F53;&#x7684;value&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8BE5;&#x547D;&#x4EE4;
+apiVersion: v1
+data:
+  password: MTIzNDU2
+  username: YWRtaW4=
+kind: Secret
+metadata:
+......
+[root@k8s-master ~]# echo -n MTIzNDU2 |base64 --decode  #&#x901A;&#x8FC7; base64 &#x5C06; Value &#x53CD;&#x7F16;&#x7801;&#xFF1A;
+123456
+[root@k8s-master ~]# echo -n YWRtaW4= |base64 --decode
+admin
+</code></pre>
+<p><strong>&#x5982;&#x4F55;&#x4F7F;&#x7528;Secret&#xFF1F;&#xFF1F;</strong></p>
+<blockquote>
+<p>Pod &#x53EF;&#x4EE5;&#x901A;&#x8FC7; Volume &#x6216;&#x8005;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x7684;&#x65B9;&#x5F0F;&#x4F7F;&#x7528; Secret</p>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master volumes]# vim pod-secret-demo.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-secret
+spec:
+  containers:
+  - name: pod-secret
+    image: busybox
+    args:
+      - /bin/sh
+      - -c
+      - sleep 10;touch /tmp/healthy;sleep 30000
+    volumeMounts:   #&#x5C06; foo mount &#x5230;&#x5BB9;&#x5668;&#x8DEF;&#x5F84; /etc/foo&#xFF0C;&#x53EF;&#x6307;&#x5B9A;&#x8BFB;&#x5199;&#x6743;&#x9650;&#x4E3A; readOnly&#x3002;
+    - name: foo
+      mountPath: &quot;/etc/foo&quot;
+      readOnly: true
+  volumes:    #&#x5B9A;&#x4E49; volume foo&#xFF0C;&#x6765;&#x6E90;&#x4E3A; secret mysecret&#x3002;
+  - name: foo
+    secret:
+      secretName: mysecret
+[root@k8s-master volumes]# kubectl apply -f pod-secret-demo.yaml
+pod/pod-secret created
+[root@k8s-master volumes]# kubectl get pods
+pod-secret                           1/1       Running   0          1m
+[root@k8s-master volumes]# kubectl exec -it pod-secret sh
+/ # ls /etc/foo/
+password  username
+/ # cat /etc/foo/username
+admin/ #
+/ # cat /etc/foo/password
+123456/ #
+</code></pre>
+<blockquote>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;Kubernetes &#x4F1A;&#x5728;&#x6307;&#x5B9A;&#x7684;&#x8DEF;&#x5F84; /etc/foo &#x4E0B;&#x4E3A;&#x6BCF;&#x6761;&#x654F;&#x611F;&#x6570;&#x636E;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x6587;&#x4EF6;&#x540D;&#x5C31;&#x662F;&#x6570;&#x636E;&#x6761;&#x76EE;&#x7684; Key&#xFF0C;&#x8FD9;&#x91CC;&#x662F; /etc/foo/username &#x548C; /etc/foo/password&#xFF0C;Value &#x5219;&#x4EE5;&#x660E;&#x6587;&#x5B58;&#x653E;&#x5728;&#x6587;&#x4EF6;&#x4E2D;&#x3002;&#x4E5F;&#x53EF;&#x4EE5;&#x81EA;&#x5B9A;&#x4E49;&#x5B58;&#x653E;&#x6570;&#x636E;&#x7684;&#x6587;&#x4EF6;&#x540D;&#xFF0C;&#x6BD4;&#x5982;&#x5C06;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x6539;&#x4E3A;&#xFF1A;</p>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master volumes]# cat pod-secret-demo.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-secret
+spec:
+  containers:
+  - name: pod-secret
+    image: busybox
+    args:
+      - /bin/sh
+      - -c
+      - sleep 10;touch /tmp/healthy;sleep 30000
+    volumeMounts:
+    - name: foo
+      mountPath: &quot;/etc/foo&quot;
+      readOnly: true
+  volumes:
+  - name: foo
+    secret:
+      secretName: mysecret
+      items:    #&#x81EA;&#x5B9A;&#x4E49;&#x5B58;&#x653E;&#x6570;&#x636E;&#x7684;&#x6587;&#x4EF6;&#x540D;
+      - key: username
+        path: my-secret/my-username
+      - key: password
+        path: my-secret/my-password
+[root@k8s-master volumes]# kubectl delete pods pod-secret
+pod &quot;pod-secret&quot; deleted
+[root@k8s-master volumes]# kubectl apply -f pod-secret-demo.yaml
+pod/pod-secret created
+[root@k8s-master volumes]# kubectl exec -it pod-secret sh
+/ # cat /etc/foo/my-secret/my-username
+admin
+/ # cat /etc/foo/my-secret/my-password
+123456
+</code></pre>
+<blockquote>
+<p>&#x8FD9;&#x65F6;&#x6570;&#x636E;&#x5C06;&#x5206;&#x522B;&#x5B58;&#x653E;&#x5728; /etc/foo/my-secret/my-username &#x548C; /etc/foo/my-secret/my-password &#x4E2D;&#x3002;
+&#x4EE5; Volume &#x65B9;&#x5F0F;&#x4F7F;&#x7528;&#x7684; Secret &#x652F;&#x6301;&#x52A8;&#x6001;&#x66F4;&#x65B0;&#xFF1A;Secret &#x66F4;&#x65B0;&#x540E;&#xFF0C;&#x5BB9;&#x5668;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x4E5F;&#x4F1A;&#x66F4;&#x65B0;&#x3002;
+&#x5C06; password &#x66F4;&#x65B0;&#x4E3A; abcdef&#xFF0C;base64 &#x7F16;&#x7801;&#x4E3A; YWJjZGVm</p>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master ~]# vim secret.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysecret
+data:
+  username: YWRtaW4=
+  password: YWJjZGVm
+[root@k8s-master ~]# kubectl apply -f secret.yaml
+secret/mysecret configured
+/ # cat /etc/foo/my-secret/my-password
+abcdef
+</code></pre>
+<blockquote>
+<p>&#x901A;&#x8FC7; Volume &#x4F7F;&#x7528; Secret&#xFF0C;&#x5BB9;&#x5668;&#x5FC5;&#x987B;&#x4ECE;&#x6587;&#x4EF6;&#x8BFB;&#x53D6;&#x6570;&#x636E;&#xFF0C;&#x4F1A;&#x7A0D;&#x663E;&#x9EBB;&#x70E6;&#xFF0C;Kubernetes &#x8FD8;&#x652F;&#x6301;&#x901A;&#x8FC7;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x4F7F;&#x7528; Secret&#x3002;</p>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master volumes]# cp pod-secret-demo.yaml pod-secret-env-demo.yaml
+[root@k8s-master volumes]# vim pod-secret-env-demo.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-secret-env
+spec:
+  containers:
+  - name: pod-secret-env
+    image: busybox
+    args:
+      - /bin/sh
+      - -c
+      - sleep 10;touch /tmp/healthy;sleep 30000
+    env:
+      - name: SECRET_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: mysecret
+            key: username
+      - name: SECRET_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: mysecret
+            key: password
+[root@k8s-master volumes]# kubectl apply -f pod-secret-env-demo.yaml
+pod/pod-secret-env created
+
+[root@k8s-master volumes]# kubectl exec -it pod-secret-env sh
+/ # echo $SECRET_USERNAME
+admin
+/ # echo $SECRET_PASSWORD
+abcdef
+</code></pre>
+<blockquote>
+<p>&#x901A;&#x8FC7;&#x73AF;&#x5883;&#x53D8;&#x91CF; SECRET_USERNAME &#x548C; SECRET_PASSWORD &#x6210;&#x529F;&#x8BFB;&#x53D6;&#x5230; Secret &#x7684;&#x6570;&#x636E;&#x3002;
+&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF0C;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x8BFB;&#x53D6; Secret &#x5F88;&#x65B9;&#x4FBF;&#xFF0C;&#x4F46;&#x65E0;&#x6CD5;&#x652F;&#x6491; Secret &#x52A8;&#x6001;&#x66F4;&#x65B0;&#x3002;
+Secret &#x53EF;&#x4EE5;&#x4E3A; Pod &#x63D0;&#x4F9B;&#x5BC6;&#x7801;&#x3001;Token&#x3001;&#x79C1;&#x94A5;&#x7B49;&#x654F;&#x611F;&#x6570;&#x636E;&#xFF1B;&#x5BF9;&#x4E8E;&#x4E00;&#x4E9B;&#x975E;&#x654F;&#x611F;&#x6570;&#x636E;&#xFF0C;&#x6BD4;&#x5982;&#x5E94;&#x7528;&#x7684;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x7528; ConfigMap&#x3002;</p>
+</blockquote>
+<h3 id="82&#x3001;conifgmap&#x89E3;&#x6790;">8.2&#x3001;ConifgMap&#x89E3;&#x6790;</h3>
+<blockquote>
+<p>configmap&#x662F;&#x8BA9;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4ECE;&#x955C;&#x50CF;&#x4E2D;&#x89E3;&#x8026;&#xFF0C;&#x8BA9;&#x955C;&#x50CF;&#x7684;&#x53EF;&#x79FB;&#x690D;&#x6027;&#x548C;&#x53EF;&#x590D;&#x5236;&#x6027;&#x3002;&#x8BB8;&#x591A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4F1A;&#x4ECE;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x3001;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#x6216;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x4E2D;&#x8BFB;&#x53D6;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#x3002;&#x8FD9;&#x4E9B;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#x9700;&#x8981;&#x4E0E;docker image&#x89E3;&#x8026;&#xFF0C;&#x4F60;&#x603B;&#x4E0D;&#x80FD;&#x6BCF;&#x4FEE;&#x6539;&#x4E00;&#x4E2A;&#x914D;&#x7F6E;&#x5C31;&#x91CD;&#x505A;&#x4E00;&#x4E2A;image&#x5427;&#xFF1F;ConfigMap API&#x7ED9;&#x6211;&#x4EEC;&#x63D0;&#x4F9B;&#x4E86;&#x5411;&#x5BB9;&#x5668;&#x4E2D;&#x6CE8;&#x5165;&#x914D;&#x7F6E;&#x4FE1;&#x606F;&#x7684;&#x673A;&#x5236;&#xFF0C;ConfigMap&#x53EF;&#x4EE5;&#x88AB;&#x7528;&#x6765;&#x4FDD;&#x5B58;&#x5355;&#x4E2A;&#x5C5E;&#x6027;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x4FDD;&#x5B58;&#x6574;&#x4E2A;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x6216;&#x8005;JSON&#x4E8C;&#x8FDB;&#x5236;&#x5927;&#x5BF9;&#x8C61;&#x3002;
+ConfigMap API&#x8D44;&#x6E90;&#x7528;&#x6765;&#x4FDD;&#x5B58;key-value pair&#x914D;&#x7F6E;&#x6570;&#x636E;&#xFF0C;&#x8FD9;&#x4E2A;&#x6570;&#x636E;&#x53EF;&#x4EE5;&#x5728;pods&#x91CC;&#x4F7F;&#x7528;&#xFF0C;&#x6216;&#x8005;&#x88AB;&#x7528;&#x6765;&#x4E3A;&#x50CF;controller&#x4E00;&#x6837;&#x7684;&#x7CFB;&#x7EDF;&#x7EC4;&#x4EF6;&#x5B58;&#x50A8;&#x914D;&#x7F6E;&#x6570;&#x636E;&#x3002;&#x867D;&#x7136;ConfigMap&#x8DDF;Secrets&#x7C7B;&#x4F3C;&#xFF0C;&#x4F46;&#x662F;ConfigMap&#x66F4;&#x65B9;&#x4FBF;&#x7684;&#x5904;&#x7406;&#x4E0D;&#x542B;&#x654F;&#x611F;&#x4FE1;&#x606F;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x3002; &#x6CE8;&#x610F;&#xFF1A;ConfigMaps&#x4E0D;&#x662F;&#x5C5E;&#x6027;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x66FF;&#x4EE3;&#x54C1;&#x3002;ConfigMaps&#x53EA;&#x662F;&#x4F5C;&#x4E3A;&#x591A;&#x4E2A;properties&#x6587;&#x4EF6;&#x7684;&#x5F15;&#x7528;&#x3002;&#x53EF;&#x4EE5;&#x628A;&#x5B83;&#x7406;&#x89E3;&#x4E3A;Linux&#x7CFB;&#x7EDF;&#x4E2D;&#x7684;/etc&#x76EE;&#x5F55;&#xFF0C;&#x4E13;&#x95E8;&#x7528;&#x6765;&#x5B58;&#x50A8;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x76EE;&#x5F55;&#x3002;&#x4E0B;&#x9762;&#x4E3E;&#x4E2A;&#x4F8B;&#x5B50;&#xFF0C;&#x4F7F;&#x7528;ConfigMap&#x914D;&#x7F6E;&#x6765;&#x521B;&#x5EFA;Kuberntes Volumes&#xFF0C;ConfigMap&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;data&#x9879;&#x90FD;&#x4F1A;&#x6210;&#x4E3A;&#x4E00;&#x4E2A;&#x65B0;&#x6587;&#x4EF6;&#x3002;</p>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master volumes]# kubectl explain cm
+KIND:     ConfigMap
+VERSION:  v1
+FIELDS:
+   apiVersion   &lt;string&gt;
+   binaryData   &lt;map[string]string&gt;
+   data &lt;map[string]string&gt;
+   kind &lt;string&gt;
+   metadata &lt;Object&gt;
+</code></pre>
+<p><strong>ConfigMap&#x521B;&#x5EFA;&#x65B9;&#x5F0F;</strong></p>
+<blockquote>
+<p>&#x4E0E; Secret &#x4E00;&#x6837;&#xFF0C;ConfigMap &#x4E5F;&#x652F;&#x6301;&#x56DB;&#x79CD;&#x521B;&#x5EFA;&#x65B9;&#x5F0F;&#xFF1A;</p>
+<ul>
+<li>1&#x3001; &#x901A;&#x8FC7; --from-literal&#xFF1A;&#x6BCF;&#x4E2A; --from-literal &#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x4FE1;&#x606F;&#x6761;&#x76EE;&#x3002;</li>
+</ul>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master volumes]# kubectl create configmap nginx-config --from-literal=nginx_port=80 --from-literal=server_name=myapp.magedu.com
+configmap/nginx-config created
+[root@k8s-master volumes]# kubectl get cm
+NAME           DATA      AGE
+nginx-config   2         6s
+[root@k8s-master volumes]# kubectl describe cm nginx-config
+Name:         nginx-config
+Namespace:    default
+Labels:       &lt;none&gt;
+Annotations:  &lt;none&gt;
+
+Data
+====
+server_name:
+----
+myapp.magedu.com
+nginx_port:
+----
+80
+Events:  &lt;none&gt;
+</code></pre>
+<blockquote>
+<ul>
+<li>2&#x3001;&#x901A;&#x8FC7; --from-file&#xFF1A;
+&#x6BCF;&#x4E2A;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x4FE1;&#x606F;&#x6761;&#x76EE;&#x3002;</li>
+</ul>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master mainfests]# mkdir configmap &amp;&amp; cd configmap
+[root@k8s-master configmap]# vim www.conf
+server {
+    server_name myapp.magedu.com;
+    listen 80;
+    root /data/web/html;
+}
+[root@k8s-master configmap]# kubectl create configmap nginx-www --from-file=./www.conf
+configmap/nginx-www created
+[root@k8s-master configmap]# kubectl get cm
+NAME           DATA      AGE
+nginx-config   2         3m
+nginx-www      1         4s
+[root@k8s-master configmap]# kubectl get cm nginx-www -o yaml
+apiVersion: v1
+data:
+  www.conf: &quot;server {\n\tserver_name myapp.magedu.com;\n\tlisten 80;\n\troot /data/web/html;\n}\n&quot;
+kind: ConfigMap
+metadata:
+  creationTimestamp: 2018-10-10T08:50:06Z
+  name: nginx-www
+  namespace: default
+  resourceVersion: &quot;389929&quot;
+  selfLink: /api/v1/namespaces/default/configmaps/nginx-www
+  uid: 7c3dfc35-cc69-11e8-801a-000c2972dc1f
+</code></pre>
+<p><strong>&#x5982;&#x4F55;&#x4F7F;&#x7528;configMap&#xFF1F;&#xFF1F;</strong></p>
+<ul>
+<li>1&#x3001;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x65B9;&#x5F0F;&#x6CE8;&#x5165;&#x5230;pod</li>
+</ul>
+<pre><code class="lang-code">[root@k8s-master configmap]# vim pod-configmap.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cm-1
+  namespace: default
+  labels:
+    app: myapp
+    tier: frontend
+  annotations:
+    magedu.com/created-by: &quot;cluster admin&quot;
+spec:
+  containers:
+  - name: myapp
+    image: ikubernetes/myapp:v1
+    ports:
+    - name: http
+      containerPort: 80
+    env:
+    - name: NGINX_SERVER_PORT
+      valueFrom:
+        configMapKeyRef:
+          name: nginx-config
+          key: nginx_port
+    - name: NGINX_SERVER_NAME
+      valueFrom:
+        configMapKeyRef:
+          name: nginx-config
+          key: server_name
+[root@k8s-master configmap]# kubectl apply -f pod-configmap.yaml
+pod/pod-cm-1 created
+[root@k8s-master configmap]# kubectl exec -it pod-cm-1 -- /bin/sh
+/ # echo $NGINX_SERVER_PORT
+80
+/ # echo $NGINX_SERVER_NAME
+myapp.magedu.com
+</code></pre>
+<blockquote>
+<p>&#x4FEE;&#x6539;&#x7AEF;&#x53E3;&#xFF0C;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#x4F7F;&#x7528;&#x73AF;&#x5883;&#x53D8;&#x5316;&#x6CE8;&#x5165;pod&#x4E2D;&#x7684;&#x7AEF;&#x53E3;&#x4E0D;&#x4F1A;&#x6839;&#x636E;&#x914D;&#x7F6E;&#x7684;&#x66F4;&#x6539;&#x800C;&#x53D8;&#x5316;</p>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master volumes]#  kubectl edit cm nginx-config
+configmap/nginx-config edited
+/ # echo $NGINX_SERVER_PORT
+80
+</code></pre>
+<ul>
+<li>2&#x3001;&#x5B58;&#x50A8;&#x5377;&#x65B9;&#x5F0F;&#x6302;&#x8F7D;configmap&#xFF1A;</li>
+</ul>
+<blockquote>
+<p>Volume &#x5F62;&#x5F0F;&#x7684; ConfigMap &#x4E5F;&#x652F;&#x6301;&#x52A8;&#x6001;&#x66F4;&#x65B0;</p>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master configmap ~]# vim pod-configmap-2.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cm-2
+  namespace: default
+  labels:
+    app: myapp
+    tier: frontend
+  annotations:
+    magedu.com/created-by: &quot;cluster admin&quot;
+spec:
+  containers:
+  - name: myapp
+    image: ikubernetes/myapp:v1
+    ports:
+    - name: http
+      containerPort: 80
+    volumeMounts:
+    - name: nginxconf
+      mountPath: /etc/nginx/config.d/
+      readOnly: true
+  volumes:
+  - name: nginxconf
+    configMap:
+      name: nginx-config
+[root@k8s-master configmap ~]# kubectl apply -f pod-configmap-2.yaml
+pod/pod-cm-2 created
+[root@k8s-master configmap ~]# kubectl get pods
+[root@k8s-master configmap ~]# kubectl exec -it pod-cm-2 -- /bin/sh
+/ # cd /etc/nginx/config.d
+/ # cat nginx_port
+80
+/ # cat server_name
+myapp.magedu.com
+
+[root@k8s-master configmap ~]# kubectl edit cm nginx-config  #&#x4FEE;&#x6539;&#x7AEF;&#x53E3;&#xFF0C;&#x518D;&#x5728;&#x5BB9;&#x5668;&#x4E2D;&#x67E5;&#x770B;&#x7AEF;&#x53E3;&#x662F;&#x5426;&#x53D8;&#x5316;&#x3002;
+apiVersion: v1
+data:
+  nginx_port: &quot;800&quot;
+  ......
+
+/ # cat nginx_port
+800
+[root@k8s-master configmap ~]# kubectl delete -f pod-configmap2.yaml
+</code></pre>
+<blockquote>
+<p>3&#x3001;&#x4EE5;nginx-www&#x914D;&#x7F6E;nginx</p>
+</blockquote>
+<pre><code class="lang-code">[root@k8s-master configmap ~]# vim pod-configmap3.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-cm-3
+  namespace: default
+  labels:
+    app: myapp
+    tier: frontend
+  annotations:
+    magedu.com/created-by: &quot;cluster admin&quot;
+spec:
+  containers:
+  - name: myapp
+    image: ikubernetes/myapp:v1
+    ports:
+    - name: http
+      containerPort: 80
+    volumeMounts:
+    - name: nginxconf
+      mountPath: /etc/nginx/conf.d/
+      readOnly: true
+  volumes:
+  - name: nginxconf
+    configMap:
+      name: nginx-www
+[root@k8s-master configmap ~]# kubectl apply -f pod-configmap3.yaml
+pod/pod-cm-3 created
+[root@k8s-master configmap ~]# kubectl get pods
+[root@k8s-master configmap]# kubectl exec -it pod-cm-3 -- /bin/sh
+/ # cd /etc/nginx/conf.d/
+/etc/nginx/conf.d # ls
+www.conf
+/etc/nginx/conf.d # cat www.conf
+server {
+    server_name myapp.magedu.com;
+    listen 80;
+    root /data/web/html;
+}
+</code></pre>
+<p>&#x81F3;&#x6B64;&#xFF0C;K8S&#x7684;&#x5B58;&#x50A8;&#x5377;&#x5230;&#x6B64;&#x7ED3;&#x675F;&#xFF01;&#xFF01;&#xFF01;</p>
+<p>Don&apos;t forget the beginner&apos;s mind</p>
+<p>&#x53D6;&#x81EA;<a href="https://www.cnblogs.com/linuxk/p/9760363.html#%E5%85%AB%E9%85%8D%E7%BD%AE%E5%AE%B9%E5%99%A8%E5%BA%94%E7%94%A8secret%E5%92%8Cconfigmap" target="_blank">Kubernetes&#x5B66;&#x4E60;&#x4E4B;&#x8DEF;&#xFF08;&#x5341;&#x516D;&#xFF09;&#x4E4B;&#x5B58;&#x50A8;&#x5377;</a></p>
+<footer class="page-footer"><span class="copyright">&#xA9; lyuanx all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2019-08-31 10:01:32
+</span></footer>
+                                
+                                </section>
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../pod/pod.html" class="navigation navigation-prev " aria-label="Previous page: pod">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../job/job.html" class="navigation navigation-next " aria-label="Next page: job">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"存储卷","level":"2.2","depth":1,"next":{"title":"job","level":"2.3","depth":1,"path":"kubernetes/job/job.md","ref":"kubernetes/job/job.md","articles":[]},"previous":{"title":"pod","level":"2.1","depth":1,"path":"kubernetes/pod/pod.md","ref":"kubernetes/pod/pod.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","-lunr","-search","-livereload","donate","github-buttons@2.1.0","expandable-chapters","tbfed-pagefooter","toc","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"fontState":{"size":"2","family":"sans","theme":"night"},"pluginsConfig":{"donate":{"alipay":"","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"","wechatText":"微信打赏"},"github-buttons":{"repo":"darrenliuwei/gitbook","types":["star"],"size":"small"},"tbfed-pagefooter":{"copyright":"&copy lyuanx","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"expandable-chapters":{},"toc":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"lyuanx","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"lyuanx","language":"zh-hans","gitbook":"*","description":"lyuanx学习历程"},"file":{"path":"kubernetes/volumes/volumes.md","mtime":"2019-08-31T02:01:32.229Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-31T02:08:23.792Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

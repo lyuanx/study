@@ -17,7 +17,8 @@
         "donate",
         "github-buttons@2.1.0",
         "expandable-chapters",
-        "tbfed-pagefooter"
+        "tbfed-pagefooter",
+        "toc"
     ],
     "pluginsConfig": {
         "donate": {

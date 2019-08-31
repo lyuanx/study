@@ -1,0 +1,515 @@
+
+<!DOCTYPE HTML>
+<html lang="zh-hans" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>ingress · lyuanx</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="lyuanx">
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-donate/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-tbfed-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../../helm/helm.html" />
+    
+    
+    <link rel="prev" href="../cronjob/cronjob.html" />
+    
+
+    <style>
+    @media only screen and (max-width: 640px) {
+        .book-header .hidden-mobile {
+            display: none;
+        }
+    }
+    </style>
+    <script>
+        window["gitbook-plugin-github-buttons"] = {"repo":"darrenliuwei/gitbook","types":["star"],"size":"small"};
+    </script>
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    导读
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">kubernetes</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../pod/pod.html">
+            
+                <a href="../pod/pod.html">
+            
+                    
+                    pod
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../volumes/volumes.html">
+            
+                <a href="../volumes/volumes.html">
+            
+                    
+                    存储卷
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../job/job.html">
+            
+                <a href="../job/job.html">
+            
+                    
+                    job
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../cronjob/cronjob.html">
+            
+                <a href="../cronjob/cronjob.html">
+            
+                    
+                    cronjob
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.5" data-path="ingress.html">
+            
+                <a href="ingress.html">
+            
+                    
+                    ingress
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">helm</li>
+        
+        
+    
+        <li class="chapter " data-level="3.1" data-path="../../helm/helm.html">
+            
+                <a href="../../helm/helm.html">
+            
+                    
+                    Kubernetes 应用部署的挑战
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">信管</li>
+        
+        
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            本书使用 GitBook 发布
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >ingress</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+                                <section class="normal markdown-section">
+                                
+                                <!-- toc -->
+<ul>
+<li><a href="#%E5%90%8D%E8%AF%8D%E8%A7%A3%E9%87%8A%EF%BC%9Aingress">&#x540D;&#x8BCD;&#x89E3;&#x91CA;&#xFF1A;Ingress</a><ul>
+<li><a href="#ingress">Ingress</a></li>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AFingress">&#x4EC0;&#x4E48;&#x662F;Ingress</a></li>
+<li><a href="#ingress%E6%A0%BC%E5%BC%8F">Ingress&#x683C;&#x5F0F;</a></li>
+<li><a href="#%E5%8D%95%E6%9C%8D%E5%8A%A1ingress">&#x5355;&#x670D;&#x52A1;Ingress</a></li>
+<li><a href="#%E8%B7%AF%E7%94%B1%E5%88%B0%E5%A4%9A%E6%9C%8D%E5%8A%A1%E7%9A%84ingress">&#x8DEF;&#x7531;&#x5230;&#x591A;&#x670D;&#x52A1;&#x7684;Ingress</a></li>
+<li><a href="#%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BAingress">&#x865A;&#x62DF;&#x4E3B;&#x673A;Ingress</a></li>
+<li><a href="#tls-ingress">TLS Ingress</a></li>
+<li><a href="#%E6%9B%B4%E6%96%B0ingress">&#x66F4;&#x65B0;Ingress</a></li>
+<li><a href="#ingress-controller">Ingress Controller</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+<h1 id="&#x540D;&#x8BCD;&#x89E3;&#x91CA;&#xFF1A;ingress">&#x540D;&#x8BCD;&#x89E3;&#x91CA;&#xFF1A;Ingress</h1>
+<h2 id="ingress">Ingress</h2>
+<p>&#x672F;&#x8BED;</p>
+<p>&#x5728;&#x672C;&#x7BC7;&#x6587;&#x7AE0;&#x4E2D;&#x4F60;&#x5C06;&#x4F1A;&#x770B;&#x5230;&#x4E00;&#x4E9B;&#x5728;&#x5176;&#x4ED6;&#x5730;&#x65B9;&#x88AB;&#x4EA4;&#x53C9;&#x4F7F;&#x7528;&#x7684;&#x672F;&#x8BED;&#xFF0C;&#x4E3A;&#x4E86;&#x9632;&#x6B62;&#x4EA7;&#x751F;&#x6B67;&#x4E49;&#xFF0C;&#x6211;&#x4EEC;&#x9996;&#x5148;&#x6765;&#x6F84;&#x6E05;&#x4E0B;&#x3002;</p>
+<ul>
+<li>&#x8282;&#x70B9;&#xFF1A;Kubernetes&#x96C6;&#x7FA4;&#x4E2D;&#x7684;&#x670D;&#x52A1;&#x5668;&#xFF1B;</li>
+<li>&#x96C6;&#x7FA4;&#xFF1A;Kubernetes&#x7BA1;&#x7406;&#x7684;&#x4E00;&#x7EC4;&#x670D;&#x52A1;&#x5668;&#x96C6;&#x5408;&#xFF1B;</li>
+<li>&#x8FB9;&#x754C;&#x8DEF;&#x7531;&#x5668;&#xFF1A;&#x4E3A;&#x5C40;&#x57DF;&#x7F51;&#x548C;Internet&#x8DEF;&#x7531;&#x6570;&#x636E;&#x5305;&#x7684;&#x8DEF;&#x7531;&#x5668;&#xFF0C;&#x6267;&#x884C;&#x9632;&#x706B;&#x5899;&#x4FDD;&#x62A4;&#x5C40;&#x57DF;&#x7F51;&#x7EDC;&#xFF1B;</li>
+<li>&#x96C6;&#x7FA4;&#x7F51;&#x7EDC;&#xFF1A;&#x9075;&#x5FAA;Kubernetes&#x7F51;&#x7EDC;&#x6A21;&#x578B;&#x5B9E;&#x73B0;&#x7FA4;&#x96C6;&#x5185;&#x7684;&#x901A;&#x4FE1;&#x7684;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#xFF0C;&#x6BD4;&#x5982;flannel &#x548C; OVS&#x3002;</li>
+<li>&#x670D;&#x52A1;&#xFF1A;&#x4F7F;&#x7528;&#x6807;&#x7B7E;&#x9009;&#x62E9;&#x5668;&#x6807;&#x8BC6;&#x4E00;&#x7EC4;pod&#x6210;&#x4E3A;&#x7684;Kubernetes Service&#x3002; &#x9664;&#x975E;&#x53E6;&#x6709;&#x8BF4;&#x660E;&#xFF0C;&#x5426;&#x5219;&#x670D;&#x52A1;&#x7684;&#x865A;&#x62DF;IP&#x4EC5;&#x53EF;&#x5728;&#x96C6;&#x7FA4;&#x5185;&#x90E8;&#x8BBF;&#x95EE;&#x3002;</li>
+</ul>
+<h2 id="&#x4EC0;&#x4E48;&#x662F;ingress">&#x4EC0;&#x4E48;&#x662F;Ingress</h2>
+<p>&#x901A;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;service&#x548C;pod&#x7684;IP&#x4EC5;&#x53EF;&#x5728;&#x96C6;&#x7FA4;&#x5185;&#x90E8;&#x8BBF;&#x95EE;&#x3002;&#x96C6;&#x7FA4;&#x5916;&#x90E8;&#x7684;&#x8BF7;&#x6C42;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x8F6C;&#x53D1;&#x5230;service&#x5728;Node&#x4E0A;&#x66B4;&#x9732;&#x7684;NodePort&#x4E0A;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x7531;kube-proxy&#x5C06;&#x5176;&#x8F6C;&#x53D1;&#x7ED9;&#x76F8;&#x5173;&#x7684;Pod&#x3002;</p>
+<p>&#x800C;Ingress&#x5C31;&#x662F;&#x4E3A;&#x8FDB;&#x5165;&#x96C6;&#x7FA4;&#x7684;&#x8BF7;&#x6C42;&#x63D0;&#x4F9B;&#x8DEF;&#x7531;&#x89C4;&#x5219;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;</p>
+<pre><code class="lang-code">    internet
+        |
+   [ Ingress ]
+   --|-----|--
+   [ Services ]
+</code></pre>
+<p>Ingress&#x53EF;&#x4EE5;&#x7ED9;service&#x63D0;&#x4F9B;&#x96C6;&#x7FA4;&#x5916;&#x90E8;&#x8BBF;&#x95EE;&#x7684;URL&#x3001;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x3001;SSL&#x7EC8;&#x6B62;&#x3001;HTTP&#x8DEF;&#x7531;&#x7B49;&#x3002;&#x4E3A;&#x4E86;&#x914D;&#x7F6E;&#x8FD9;&#x4E9B;Ingress&#x89C4;&#x5219;&#xFF0C;&#x96C6;&#x7FA4;&#x7BA1;&#x7406;&#x5458;&#x9700;&#x8981;&#x90E8;&#x7F72;&#x4E00;&#x4E2A;Ingress controller&#xFF0C;&#x5B83;&#x76D1;&#x542C;Ingress&#x548C;service&#x7684;&#x53D8;&#x5316;&#xFF0C;&#x5E76;&#x6839;&#x636E;&#x89C4;&#x5219;&#x914D;&#x7F6E;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#x5E76;&#x63D0;&#x4F9B;&#x8BBF;&#x95EE;&#x5165;&#x53E3;&#x3002;</p>
+<h2 id="ingress&#x683C;&#x5F0F;">Ingress&#x683C;&#x5F0F;</h2>
+<pre><code class="lang-code">apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /testpath
+        backend:
+          serviceName: test
+          servicePort: 80
+</code></pre>
+<p>&#x6BCF;&#x4E2A;Ingress&#x90FD;&#x9700;&#x8981;&#x914D;&#x7F6E;rules&#xFF0C;&#x76EE;&#x524D;Kubernetes&#x4EC5;&#x652F;&#x6301;http&#x89C4;&#x5219;&#x3002;&#x4E0A;&#x9762;&#x7684;&#x793A;&#x4F8B;&#x8868;&#x793A;&#x8BF7;&#x6C42;/testpath&#x65F6;&#x8F6C;&#x53D1;&#x5230;&#x670D;&#x52A1;test&#x7684;80&#x7AEF;&#x53E3;&#x3002;</p>
+<p>&#x6839;&#x636E;Ingress Spec&#x914D;&#x7F6E;&#x7684;&#x4E0D;&#x540C;&#xFF0C;Ingress&#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#x4EE5;&#x4E0B;&#x51E0;&#x79CD;&#x7C7B;&#x578B;&#xFF1A;</p>
+<h2 id="&#x5355;&#x670D;&#x52A1;ingress">&#x5355;&#x670D;&#x52A1;Ingress</h2>
+<p>&#x5355;&#x670D;&#x52A1;Ingress&#x5373;&#x8BE5;Ingress&#x4EC5;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x6CA1;&#x6709;&#x4EFB;&#x4F55;&#x89C4;&#x5219;&#x7684;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x3002;</p>
+<pre><code class="lang-code">apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+spec:
+  backend:
+    serviceName: testsvc
+    servicePort: 80
+</code></pre>
+<blockquote>
+<p>&#x6CE8;&#xFF1A;&#x5355;&#x4E2A;&#x670D;&#x52A1;&#x8FD8;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;Service.Type=NodePort&#x6216;&#x8005;Service.Type=LoadBalancer&#x6765;&#x5BF9;&#x5916;&#x66B4;&#x9732;&#x3002;</p>
+</blockquote>
+<h2 id="&#x8DEF;&#x7531;&#x5230;&#x591A;&#x670D;&#x52A1;&#x7684;ingress">&#x8DEF;&#x7531;&#x5230;&#x591A;&#x670D;&#x52A1;&#x7684;Ingress</h2>
+<p>&#x8DEF;&#x7531;&#x5230;&#x591A;&#x670D;&#x52A1;&#x7684;Ingress&#x5373;&#x6839;&#x636E;&#x8BF7;&#x6C42;&#x8DEF;&#x5F84;&#x7684;&#x4E0D;&#x540C;&#x8F6C;&#x53D1;&#x5230;&#x4E0D;&#x540C;&#x7684;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x4E0A;&#xFF0C;&#x6BD4;&#x5982;</p>
+<pre><code class="lang-code">foo.bar.com -&gt; 178.91.123.132 -&gt; / foo    s1:80
+                                 / bar    s2:80
+</code></pre>
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E0B;&#x9762;&#x7684;Ingress&#x6765;&#x5B9A;&#x4E49;&#xFF1A;</p>
+<pre><code class="lang-code">apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test
+spec:
+  rules:
+  - host: foo.bar.com
+    http:
+      paths:
+      - path: /foo
+        backend:
+          serviceName: s1
+          servicePort: 80
+      - path: /bar
+        backend:
+          serviceName: s2
+          servicePort: 80
+</code></pre>
+<p>&#x4F7F;&#x7528;kubectl create -f&#x521B;&#x5EFA;&#x5B8C;ingress&#x540E;&#xFF1A;</p>
+<pre><code class="lang-code">$ kubectl get ing
+NAME      RULE          BACKEND   ADDRESS
+test      -
+          foo.bar.com
+          /foo          s1:80
+          /bar          s2:80
+</code></pre>
+<h2 id="&#x865A;&#x62DF;&#x4E3B;&#x673A;ingress">&#x865A;&#x62DF;&#x4E3B;&#x673A;Ingress</h2>
+<p>&#x865A;&#x62DF;&#x4E3B;&#x673A;Ingress&#x5373;&#x6839;&#x636E;&#x540D;&#x5B57;&#x7684;&#x4E0D;&#x540C;&#x8F6C;&#x53D1;&#x5230;&#x4E0D;&#x540C;&#x7684;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x4E0A;&#xFF0C;&#x800C;&#x4ED6;&#x4EEC;&#x5171;&#x7528;&#x540C;&#x4E00;&#x4E2A;&#x7684;IP&#x5730;&#x5740;&#xFF0C;&#x5982;&#x4E0B;&#x6240;&#x793A;</p>
+<pre><code class="lang-code">foo.bar.com --|                 |-&gt; foo.bar.com s1:80
+              | 178.91.123.132  |
+bar.foo.com --|                 |-&gt; bar.foo.com s2:80
+</code></pre>
+<p>&#x4E0B;&#x9762;&#x662F;&#x4E00;&#x4E2A;&#x57FA;&#x4E8E;Host header&#x8DEF;&#x7531;&#x8BF7;&#x6C42;&#x7684;Ingress&#xFF1A;</p>
+<pre><code class="lang-code">apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test
+spec:
+  rules:
+  - host: foo.bar.com
+    http:
+      paths:
+      - backend:
+          serviceName: s1
+          servicePort: 80
+  - host: bar.foo.com
+    http:
+      paths:
+      - backend:
+          serviceName: s2
+          servicePort: 80
+</code></pre>
+<blockquote>
+<p>&#x6CE8;&#xFF1A;&#x6CA1;&#x6709;&#x5B9A;&#x4E49;&#x89C4;&#x5219;&#x7684;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#x79F0;&#x4E3A;&#x9ED8;&#x8BA4;&#x540E;&#x7AEF;&#x670D;&#x52A1;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x65B9;&#x4FBF;&#x7684;&#x5904;&#x7406;404&#x9875;&#x9762;&#x3002;</p>
+</blockquote>
+<h2 id="tls-ingress">TLS Ingress</h2>
+<p>TLS Ingress&#x901A;&#x8FC7;Secret&#x83B7;&#x53D6;TLS&#x79C1;&#x94A5;&#x548C;&#x8BC1;&#x4E66;(&#x540D;&#x4E3A;tls.crt&#x548C;tls.key)&#xFF0C;&#x6765;&#x6267;&#x884C;TLS&#x7EC8;&#x6B62;&#x3002;&#x5982;&#x679C;Ingress&#x4E2D;&#x7684;TLS&#x914D;&#x7F6E;&#x90E8;&#x5206;&#x6307;&#x5B9A;&#x4E86;&#x4E0D;&#x540C;&#x7684;&#x4E3B;&#x673A;&#xFF0C;&#x5219;&#x5B83;&#x4EEC;&#x5C06;&#x6839;&#x636E;&#x901A;&#x8FC7;SNI TLS&#x6269;&#x5C55;&#x6307;&#x5B9A;&#x7684;&#x4E3B;&#x673A;&#x540D;&#xFF08;&#x5047;&#x5982;Ingress controller&#x652F;&#x6301;SNI&#xFF09;&#x5728;&#x591A;&#x4E2A;&#x76F8;&#x540C;&#x7AEF;&#x53E3;&#x4E0A;&#x8FDB;&#x884C;&#x590D;&#x7528;&#x3002;</p>
+<p>&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x5305;&#x542B;tls.crt&#x548C;tls.key&#x7684;secret&#xFF1A;</p>
+<pre><code class="lang-code">apiVersion: v1
+data:
+  tls.crt: base64 encoded cert
+  tls.key: base64 encoded key
+kind: Secret
+metadata:
+  name: testsecret
+  namespace: default
+type: Opaque
+</code></pre>
+<p>Ingress&#x4E2D;&#x5F15;&#x7528;secret&#xFF1A;</p>
+<pre><code class="lang-code">apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: no-rules-map
+spec:
+  tls:
+    - secretName: testsecret
+  backend:
+    serviceName: s1
+    servicePort: 80
+</code></pre>
+<p>&#x6CE8;&#x610F;&#xFF0C;&#x4E0D;&#x540C;Ingress controller&#x652F;&#x6301;&#x7684;TLS&#x529F;&#x80FD;&#x4E0D;&#x5C3D;&#x76F8;&#x540C;&#x3002; &#x8BF7;&#x53C2;&#x9605;&#x6709;&#x5173;nginx&#xFF0C;GCE&#x6216;&#x4EFB;&#x4F55;&#x5176;&#x4ED6;Ingress controller&#x7684;&#x6587;&#x6863;&#xFF0C;&#x4EE5;&#x4E86;&#x89E3;TLS&#x7684;&#x652F;&#x6301;&#x60C5;&#x51B5;&#x3002;</p>
+<h2 id="&#x66F4;&#x65B0;ingress">&#x66F4;&#x65B0;Ingress</h2>
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;kubectl edit ing name&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x66F4;&#x65B0;ingress&#xFF1A;</p>
+<pre><code class="lang-code">$ kubectl get ing
+NAME      RULE          BACKEND   ADDRESS
+test      -                       178.91.123.132
+          foo.bar.com
+          /foo          s1:80
+$ kubectl edit ing test
+</code></pre>
+<p>&#x8FD9;&#x4F1A;&#x5F39;&#x51FA;&#x4E00;&#x4E2A;&#x5305;&#x542B;&#x5DF2;&#x6709;IngressSpec yaml&#x6587;&#x4EF6;&#x7684;&#x7F16;&#x8F91;&#x5668;&#xFF0C;&#x4FEE;&#x6539;&#x5E76;&#x4FDD;&#x5B58;&#x5C31;&#x4F1A;&#x5C06;&#x5176;&#x66F4;&#x65B0;&#x5230;kubernetes API server&#xFF0C;&#x8FDB;&#x800C;&#x89E6;&#x53D1;Ingress Controller&#x91CD;&#x65B0;&#x914D;&#x7F6E;&#x8D1F;&#x8F7D;&#x5747;&#x8861;&#xFF1A;</p>
+<pre><code class="lang-code">spec:
+  rules:
+  - host: foo.bar.com
+    http:
+      paths:
+      - backend:
+          serviceName: s1
+          servicePort: 80
+        path: /foo
+  - host: bar.baz.com
+    http:
+      paths:
+      - backend:
+          serviceName: s2
+          servicePort: 80
+        path: /foo
+..
+</code></pre>
+<p>&#x66F4;&#x65B0;&#x540E;&#xFF1A;</p>
+<pre><code class="lang-code">$ kubectl get ing
+NAME      RULE          BACKEND   ADDRESS
+test      -                       178.91.123.132
+          foo.bar.com
+          /foo          s1:80
+          bar.baz.com
+          /foo          s2:80
+</code></pre>
+<p>&#x5F53;&#x7136;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;kubectl replace -f new-ingress.yaml&#x547D;&#x4EE4;&#x6765;&#x66F4;&#x65B0;&#xFF0C;&#x5176;&#x4E2D;new-ingress.yaml&#x662F;&#x4FEE;&#x6539;&#x8FC7;&#x7684;Ingress yaml&#x3002;</p>
+<h2 id="ingress-controller">Ingress Controller</h2>
+<p><a href="https://feisky.gitbooks.io/kubernetes/practice/service-discovery-lb/traefik-ingress-installation.html" target="_blank">traefik ingress</a>&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E2A;traefik ingress&#x7684;&#x5B9E;&#x8DF5;&#x6848;&#x4F8B;
+<a href="https://github.com/kubernetes/ingress/tree/master" target="_blank">kubernetes/ingress</a>&#x63D0;&#x4F9B;&#x4E86;&#x66F4;&#x591A;&#x7684;Ingress&#x793A;&#x4F8B;</p>
+<p>&#x53C2;&#x8003;<a href="https://www.kubernetes.org.cn/ingress" target="_blank">&#x5B98;&#x7F51;&#x6587;&#x6863;</a></p>
+<footer class="page-footer"><span class="copyright">&#xA9; lyuanx all right reserved&#xFF0C;powered by Gitbook</span><span class="footer-modification">&#x8BE5;&#x6587;&#x4EF6;&#x4FEE;&#x8BA2;&#x65F6;&#x95F4;&#xFF1A;
+2019-08-31 10:02:45
+</span></footer>
+                                
+                                </section>
+                            
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../cronjob/cronjob.html" class="navigation navigation-prev " aria-label="Previous page: cronjob">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../../helm/helm.html" class="navigation navigation-next " aria-label="Next page: Kubernetes 应用部署的挑战">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"ingress","level":"2.5","depth":1,"next":{"title":"Kubernetes 应用部署的挑战","level":"3.1","depth":1,"path":"helm/helm.md","ref":"helm/helm.md","articles":[]},"previous":{"title":"cronjob","level":"2.4","depth":1,"path":"kubernetes/cronjob/cronjob.md","ref":"kubernetes/cronjob/cronjob.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","-lunr","-search","-livereload","donate","github-buttons@2.1.0","expandable-chapters","tbfed-pagefooter","toc","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"fontState":{"size":"2","family":"sans","theme":"night"},"pluginsConfig":{"donate":{"alipay":"","alipayText":"支付宝打赏","button":"打赏","title":"","wechat":"","wechatText":"微信打赏"},"github-buttons":{"repo":"darrenliuwei/gitbook","types":["star"],"size":"small"},"tbfed-pagefooter":{"copyright":"&copy lyuanx","modify_label":"该文件修订时间：","modify_format":"YYYY-MM-DD HH:mm:ss"},"expandable-chapters":{},"toc":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"lyuanx","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"lyuanx","language":"zh-hans","gitbook":"*","description":"lyuanx学习历程"},"file":{"path":"kubernetes/ingress/ingress.md","mtime":"2019-08-31T02:02:45.732Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-08-31T02:08:23.792Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-donate/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-github-buttons/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-expandable-chapters/expandable-chapters.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
